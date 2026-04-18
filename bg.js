@@ -136,6 +136,7 @@
                 'border-radius:50%;pointer-events:none;z-index:9997;' +
                 'background:transparent;' +
                 'border:1px solid ' + color + ';' +
+                'transform:translate(-50%,-50%) scale(0);' +
                 'animation:if22-ripple 0.6s cubic-bezier(0.16,1,0.3,1) ' + (i * 0.08) + 's forwards;';
             document.body.appendChild(r);
             r.addEventListener('animationend', function () { r.remove(); });
