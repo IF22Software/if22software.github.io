@@ -6,6 +6,7 @@
     <title>IF22 Software | Ana Sayfa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="bg.js" defer></script>
+    <script src="i18n.js" defer></script>
     <style>
         :root, [data-theme="dark"] {
             --bg: #000000;
@@ -87,13 +88,15 @@
         .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
         @media (max-width: 767px) { .nav-links { display: none; } }
 
-        .theme-toggle {
+        .nav-controls { display: flex; align-items: center; gap: 4px; }
+        .theme-toggle, .lang-toggle {
             width: 30px; height: 30px; border: none; background: transparent;
             cursor: pointer; color: var(--text-secondary);
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
         }
-        .theme-toggle:hover { color: var(--text-primary); background: var(--border); }
+        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
+        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
 
         /* ── Hero ── */
         .hero {
@@ -194,12 +197,14 @@
             <a href="index.html" class="logo">IF22 Software</a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Ana Sayfa</a></li>
-                    <li><a href="apps.html">Uygulamalar</a></li>
-                    <li><a href="team.html">Ekibimiz</a></li>
-                    <li><a href="contact.html">İletişim</a></li>
+                    <li><a href="index.html" class="active" data-i18n="nav.home">Ana Sayfa</a></li>
+                    <li><a href="apps.html" data-i18n="nav.apps">Uygulamalar</a></li>
+                    <li><a href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">İletişim</a></li>
                 </ul>
             </nav>
+            <div class="nav-controls">
+            <button class="lang-toggle" id="langToggle">EN</button>
             <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
                 <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
@@ -208,30 +213,31 @@
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
             </button>
+            </div>
         </div>
     </header>
 
     <main style="position:relative;z-index:1;display:flex;flex-direction:column;flex-grow:1;">
         <div class="hero">
-            <p class="hero-eyebrow">Yapay Zeka Destekli Uygulamalar</p>
+            <p class="hero-eyebrow" data-i18n="index.eyebrow">Yapay Zeka Destekli Uygulamalar</p>
             <h1 class="hero-title">
-                <span class="word">Hayallerinizi</span>&nbsp;<span class="word">Koda</span><br>
-                <span class="word">Dönüştürüyoruz</span>
+                <span class="word" data-i18n="index.word1">Hayallerinizi</span>&nbsp;<span class="word" data-i18n="index.word2">Koda</span><br>
+                <span class="word" data-i18n="index.word3">Dönüştürüyoruz</span>
             </h1>
-            <p class="hero-sub">
+            <p class="hero-sub" data-i18n="index.sub">
                 Yapay zeka destekli, modern ve kullanıcı odaklı mobil deneyimler geliştiren bağımsız bir yazılım stüdyosu.
             </p>
             <div class="hero-actions">
-                <a href="apps.html" class="btn-primary">Projelerimizi Keşfet</a>
-                <a href="contact.html" class="btn-secondary">İletişime Geç →</a>
+                <a href="apps.html" class="btn-primary" data-i18n="index.btn.apps">Projelerimizi Keşfet</a>
+                <a href="contact.html" class="btn-secondary" data-i18n="index.btn.contact">İletişime Geç →</a>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="footer-inner">
-            <p>© 2026 IF22 Software. Tüm hakları saklıdır.</p>
-            <a href="apps.html">Gizlilik Politikaları</a>
+            <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
+            <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
         </div>
     </footer>
 
