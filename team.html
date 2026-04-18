@@ -7,180 +7,123 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root, [data-theme="dark"] {
-            --bg: #000000;
-            --bg-card: #1D1D1F;
-            --bg-nav: rgba(0,0,0,0.82);
+            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
             --bg-avatar: #2C2C2E;
-            --text-primary: #F5F5F7;
-            --text-secondary: #86868B;
-            --accent: #2997FF;
+            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
             --border: rgba(255,255,255,0.1);
-            --shadow-card: 0 4px 32px rgba(0,0,0,0.6);
-            --shadow-hover: 0 16px 48px rgba(0,0,0,0.5);
+            --shadow-card: 0 2px 20px rgba(0,0,0,0.5); --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
+            --aurora-a: rgba(41,151,255,0.13); --aurora-b: rgba(94,92,230,0.08); --aurora-c: rgba(0,210,255,0.06);
         }
         [data-theme="light"] {
-            --bg: #F5F5F7;
-            --bg-card: #FFFFFF;
-            --bg-nav: rgba(245,245,247,0.88);
+            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
             --bg-avatar: #E5E5EA;
-            --text-primary: #1D1D1F;
-            --text-secondary: #6E6E73;
-            --accent: #0071E3;
+            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
             --border: rgba(0,0,0,0.08);
-            --shadow-card: 0 2px 16px rgba(0,0,0,0.07);
-            --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+            --shadow-card: 0 2px 16px rgba(0,0,0,0.06); --shadow-hover: 0 10px 32px rgba(0,0,0,0.10);
+            --aurora-a: rgba(0,113,227,0.07); --aurora-b: rgba(94,92,230,0.04); --aurora-c: rgba(0,180,255,0.04);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { -webkit-font-smoothing: antialiased; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            transition: background 0.3s ease, color 0.3s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text-primary);
+            min-height: 100vh; display: flex; flex-direction: column;
+            transition: background 0.35s ease, color 0.35s ease; overflow-x: hidden;
         }
         ::selection { background: var(--accent); color: #fff; }
 
+        #mouseAurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; will-change: background; }
+
         .site-header {
             position: sticky; top: 0; z-index: 50; width: 100%;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: var(--bg-nav);
-            border-bottom: 1px solid var(--border);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: var(--bg-nav); border-bottom: 1px solid var(--border);
+            transition: background 0.35s ease, border-color 0.35s ease;
         }
         .nav-inner {
-            max-width: 1080px; margin: 0 auto;
-            padding: 0 max(24px, 5vw);
-            height: 52px;
-            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
+            height: 52px; display: flex; align-items: center; justify-content: space-between;
         }
-        .logo {
-            font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em;
-            color: var(--text-primary); text-decoration: none; transition: opacity 0.2s;
-        }
-        .logo:hover { opacity: 0.65; }
+        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
+        .logo:hover { opacity: 0.6; }
         .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-        .nav-links a {
-            font-size: 0.8125rem; font-weight: 400;
-            color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
-        }
+        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        @media (max-width: 767px) { .nav-links { display: none; } }
         .theme-toggle {
-            width: 30px; height: 30px; border: none; background: transparent;
-            cursor: pointer; color: var(--text-secondary);
-            display: flex; align-items: center; justify-content: center;
+            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
+            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
             border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
         }
         .theme-toggle:hover { color: var(--text-primary); background: var(--border); }
-        @media (max-width: 767px) { .nav-links { display: none; } }
 
         .page-header {
-            max-width: 1080px; margin: 0 auto;
-            padding: 80px max(24px, 5vw) 56px; width: 100%;
+            position: relative; z-index: 1;
+            max-width: 1080px; margin: 0 auto; padding: 80px max(24px, 5vw) 56px; width: 100%;
         }
         .page-title {
-            font-size: clamp(2.25rem, 5vw, 3.5rem);
-            font-weight: 700; letter-spacing: -0.04em;
+            font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.04em;
             color: var(--text-primary); margin-bottom: 12px;
             opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.1s both;
         }
         .page-sub {
-            font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.6;
-            max-width: 480px;
+            font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.6; max-width: 480px;
             opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.25s both;
         }
 
         main { flex-grow: 1; }
 
-        .section {
-            max-width: 1080px; margin: 0 auto;
-            padding: 0 max(24px, 5vw) 80px; width: 100%;
-        }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
-            max-width: 680px;
-        }
+        .section { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw) 80px; width: 100%; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; max-width: 680px; }
 
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 32px 28px;
-            display: flex; flex-direction: column; align-items: center;
-            text-align: center;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px;
+            padding: 36px 28px; display: flex; flex-direction: column; align-items: center; text-align: center;
             box-shadow: var(--shadow-card);
-            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-hover); }
 
         .avatar {
-            width: 88px; height: 88px;
-            border-radius: 50%;
-            background: var(--bg-avatar);
-            border: 1px solid var(--border);
+            width: 88px; height: 88px; border-radius: 50%;
+            background: var(--bg-avatar); border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center;
-            font-size: 38px;
-            margin-bottom: 20px;
-            flex-shrink: 0;
+            font-size: 38px; margin-bottom: 22px; flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .member-name {
-            font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em;
-            color: var(--text-primary); margin-bottom: 4px;
-        }
-        .member-role {
-            font-size: 0.8125rem; font-weight: 500;
-            color: var(--accent); margin-bottom: 14px;
-        }
-        .member-bio {
-            font-size: 0.875rem; color: var(--text-secondary);
-            line-height: 1.6; margin-bottom: 20px; flex-grow: 1;
-        }
-        .member-link {
-            font-size: 0.875rem; color: var(--accent);
-            text-decoration: none; font-weight: 500;
-            transition: opacity 0.2s;
-        }
-        .member-link:hover { opacity: 0.75; }
+        .card:hover .avatar { transform: scale(1.06); }
+
+        .member-name { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 4px; }
+        .member-role { font-size: 0.8125rem; font-weight: 500; color: var(--accent); margin-bottom: 14px; }
+        .member-bio { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 22px; flex-grow: 1; }
+        .member-link { font-size: 0.875rem; color: var(--accent); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
+        .member-link:hover { opacity: 0.7; }
 
         .reveal {
-            opacity: 0; transform: scale(0.97) translateY(14px);
-            transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+            opacity: 0; transform: scale(0.96) translateY(18px);
+            transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
         }
         .reveal.visible { opacity: 1; transform: scale(1) translateY(0); }
-        .reveal-d1 { transition-delay: 0.08s; }
-        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.22s; }
 
-        footer { margin-top: auto; }
+        footer { position: relative; z-index: 1; margin-top: auto; }
         .footer-inner {
-            max-width: 1080px; margin: 0 auto;
-            padding: 28px max(24px, 5vw);
-            border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 10px;
+            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
+            border-top: 1px solid var(--border); display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 10px;
         }
-        .footer-inner p, .footer-inner a {
-            font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none;
-        }
+        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
         .footer-inner a:hover { color: var(--text-primary); }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
     </style>
 </head>
 <body>
+
+    <div id="mouseAurora" aria-hidden="true"></div>
 
     <header class="site-header">
         <div class="nav-inner">
@@ -209,7 +152,6 @@
             <h1 class="page-title">Ekibimiz</h1>
             <p class="page-sub">IF22 Software'ın arkasındaki insanlar.</p>
         </div>
-
         <div class="section">
             <div class="team-grid">
                 <div class="card reveal reveal-d1">
@@ -219,7 +161,6 @@
                     <p class="member-bio">Flutter & iOS tarafında modern mimariler, backend yapıları ve AI entegrasyonları geliştirir.</p>
                     <a href="https://github.com/ibrahimbinbuga" target="_blank" rel="noopener noreferrer" class="member-link">GitHub →</a>
                 </div>
-
                 <div class="card reveal reveal-d2">
                     <div class="avatar">👩‍💻</div>
                     <p class="member-name">Fethiye Sarı</p>
@@ -240,27 +181,23 @@
 
     <script>
         const html = document.documentElement;
-        const iconSun = document.getElementById('iconSun');
-        const iconMoon = document.getElementById('iconMoon');
+        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
+        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
+        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
 
-        function applyTheme(t) {
-            html.setAttribute('data-theme', t);
-            localStorage.setItem('if22-theme', t);
-            iconSun.style.display  = t === 'dark'  ? 'block' : 'none';
-            iconMoon.style.display = t === 'light' ? 'block' : 'none';
-        }
+        const aurora = document.getElementById('mouseAurora');
+        let tx = window.innerWidth/2, ty = window.innerHeight/2, cx = tx, cy = ty;
+        document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+        (function tick() {
+            cx += (tx-cx)*0.06; cy += (ty-cy)*0.06;
+            const dark = html.getAttribute('data-theme')==='dark';
+            const [a,b,c] = dark ? ['rgba(41,151,255,0.13)','rgba(94,92,230,0.08)','rgba(0,210,255,0.06)'] : ['rgba(0,113,227,0.07)','rgba(94,92,230,0.04)','rgba(0,180,255,0.04)'];
+            aurora.style.background = `radial-gradient(650px circle at ${cx}px ${cy}px,${a},transparent 55%),radial-gradient(380px circle at ${cx+130}px ${cy-90}px,${b},transparent 50%),radial-gradient(300px circle at ${cx-110}px ${cy+130}px,${c},transparent 45%)`;
+            requestAnimationFrame(tick);
+        })();
 
-        const saved = localStorage.getItem('if22-theme');
-        const sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        applyTheme(saved || sys);
-
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        });
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
