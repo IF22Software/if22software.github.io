@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IF22 Software | Ana Sayfa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="bg.js" defer></script>
     <style>
         :root, [data-theme="dark"] {
             --bg: #000000;
@@ -188,8 +189,6 @@
 </head>
 <body>
 
-    <div id="mouseAurora" aria-hidden="true"></div>
-
     <header class="site-header">
         <div class="nav-inner">
             <a href="index.html" class="logo">IF22 Software</a>
@@ -254,32 +253,6 @@
         document.getElementById('themeToggle').addEventListener('click', () => {
             applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         });
-
-        // ── Mouse aurora ──
-        const aurora = document.getElementById('mouseAurora');
-        let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
-        let cx = tx, cy = ty;
-
-        document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-
-        function getAuroraColors() {
-            const dark = html.getAttribute('data-theme') === 'dark';
-            return dark
-                ? ['rgba(41,151,255,0.13)', 'rgba(94,92,230,0.08)', 'rgba(0,210,255,0.06)']
-                : ['rgba(0,113,227,0.07)',  'rgba(94,92,230,0.04)', 'rgba(0,180,255,0.04)'];
-        }
-
-        (function tick() {
-            cx += (tx - cx) * 0.06;
-            cy += (ty - cy) * 0.06;
-            const [a, b, c] = getAuroraColors();
-            aurora.style.background = [
-                `radial-gradient(650px circle at ${cx}px ${cy}px, ${a}, transparent 55%)`,
-                `radial-gradient(380px circle at ${cx + 130}px ${cy - 90}px, ${b}, transparent 50%)`,
-                `radial-gradient(300px circle at ${cx - 110}px ${cy + 130}px, ${c}, transparent 45%)`
-            ].join(',');
-            requestAnimationFrame(tick);
-        })();
 
         // ── Word reveal ──
         document.querySelectorAll('.word').forEach((w, i) => {
