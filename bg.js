@@ -38,10 +38,10 @@
         'body.cursor-hover #if22-dot { width: 8px; height: 8px; opacity: 0.6; }',
         'body.cursor-hover #if22-ring { width: 48px; height: 48px; opacity: 0.35; }',
 
-        /* click ripple keyframe */
-        '@keyframes if22-ripple {',
-        '  0%   { transform: translate(-50%,-50%) scale(0); opacity: 0.6; }',
-        '  100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }',
+        /* click particle keyframe */
+        '@keyframes if22-particle {',
+        '  0%   { opacity: 1; }',
+        '  100% { opacity: 0; }',
         '}',
 
         /* glow layer */
@@ -121,26 +121,41 @@
         requestAnimationFrame(tick);
     }());
 
-    /* click: burst rings */
+    /* click: particle burst */
     document.addEventListener('click', function (e) {
         var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        var color = dark ? 'rgba(41,151,255,0.35)' : 'rgba(0,113,227,0.25)';
+        var color = dark ? 'rgba(41,151,255,0.7)' : 'rgba(0,113,227,0.6)';
+        var count = 8;
+        var pSize = 5;
 
-        [80, 130].forEach(function (size, i) {
-            var r = document.createElement('span');
-            r.setAttribute('aria-hidden', 'true');
-            r.style.cssText =
-                'position:fixed;' +
-                'left:' + e.clientX + 'px;top:' + e.clientY + 'px;' +
-                'width:' + size + 'px;height:' + size + 'px;' +
-                'border-radius:50%;pointer-events:none;z-index:9997;' +
-                'background:transparent;' +
-                'border:1px solid ' + color + ';' +
-                'transform:translate(-50%,-50%) scale(0);' +
-                'animation:if22-ripple 0.6s cubic-bezier(0.16,1,0.3,1) ' + (i * 0.08) + 's forwards;';
-            document.body.appendChild(r);
-            r.addEventListener('animationend', function () { r.remove(); });
-        });
+        for (var i = 0; i < count; i++) {
+            var angle = (i / count) * Math.PI * 2;
+            var dist  = 28 + Math.random() * 18;
+            var dx    = Math.cos(angle) * dist;
+            var dy    = Math.sin(angle) * dist;
+            var dur   = 0.45 + Math.random() * 0.15;
+
+            var p = document.createElement('span');
+            p.setAttribute('aria-hidden', 'true');
+            p.style.cssText =
+                'position:fixed;pointer-events:none;z-index:9997;' +
+                'width:' + pSize + 'px;height:' + pSize + 'px;' +
+                'border-radius:50%;' +
+                'background:' + color + ';' +
+                'left:' + (e.clientX - pSize / 2) + 'px;' +
+                'top:'  + (e.clientY - pSize / 2) + 'px;' +
+                'transition:transform ' + dur + 's cubic-bezier(0.16,1,0.3,1),' +
+                           'opacity '   + dur + 's ease;';
+            document.body.appendChild(p);
+
+            requestAnimationFrame(function (el, ddx, ddy) {
+                return function () {
+                    el.style.transform = 'translate(' + ddx + 'px,' + ddy + 'px) scale(0.3)';
+                    el.style.opacity   = '0';
+                    el.addEventListener('transitionend', function () { el.remove(); }, { once: true });
+                };
+            }(p, dx, dy));
+        }
     });
 
 }());
