@@ -26,6 +26,8 @@
             'apps.giftie.desc':    'Sevdikleriniz için mükemmel hediyeyi bulmak artık çok kolay. Yapay zeka destekli kişiselleştirilmiş hediye önerileri.',
             'apps.giftie.privacy': 'Gizlilik Politikası',
             'apps.checkmybite.desc': 'Fotoğraf çek, yapay zeka analiz etsin. Ürünlerin içerikleri, alerjenler ve besin değerleri hakkında anında bilgi al. Özel beslenme tercihleri veya hassasiyetleri olanlar için tasarlandı.',
+            'apps.checkmybite.privacy': 'Gizlilik Politikası',
+            'apps.privacy': 'Gizlilik Politikası',
             'apps.soon': 'Yakında',
 
             'team.title':       'Ekibimiz',
@@ -62,6 +64,8 @@
             'apps.giftie.desc':    'Finding the perfect gift for your loved ones has never been easier. Personalized gift suggestions powered by AI.',
             'apps.giftie.privacy': 'Privacy Policy',
             'apps.checkmybite.desc': 'Take a photo, let AI analyze it. Get instant information about product ingredients, allergens, and nutritional values. Designed for people with special dietary preferences or sensitivities.',
+            'apps.checkmybite.privacy': 'Privacy Policy',
+            'apps.privacy': 'Privacy Policy',
             'apps.soon': 'Coming Soon',
 
             'team.title':       'Our Team',
