@@ -33,6 +33,7 @@
             'apps.pomoquest.desc':    'Pomodoro tekniğini oyunlaştırılmış bir deneyimle birleştiren odaklanma uygulaması. XP kazan, seviye atla, pixel art avatarını özelleştir.',
             'apps.pomoquest.store':   'App Store\'da İncele',
             'apps.pomoquest.privacy': 'Gizlilik Politikası',
+            'apps.spendwise.desc':    'Faturalarını ve dijital aboneliklerini tek yerden takip et. Son ödeme tarihlerinde bildirim al, aylık harcama grafiklerini gör. Türkiye pazarına özel TL bazlı fatura ve abonelik yöneticisi.',
 
             'pp.pomoquest.title': 'Gizlilik Politikası',
             'pp.pomoquest.meta':  'PomoQuest — IF22 Software — Geçerlilik tarihi: 30 Nisan 2026',
@@ -123,6 +124,7 @@
             'apps.pomoquest.desc':    'A gamified focus app combining the Pomodoro technique with RPG elements. Earn XP, level up, and customize your pixel art avatar.',
             'apps.pomoquest.store':   'View on App Store',
             'apps.pomoquest.privacy': 'Privacy Policy',
+            'apps.spendwise.desc':    'Track your bills and subscriptions in one place. Get notified before due dates, view monthly spending charts. A TL-based bill and subscription manager built for the Turkish market.',
 
             'pp.pomoquest.title': 'Privacy Policy',
             'pp.pomoquest.meta':  'PomoQuest — IF22 Software — Effective 2026-04-30',
