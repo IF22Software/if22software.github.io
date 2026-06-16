@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms &amp; Conditions — Net Sayacım | IF22 Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>document.documentElement.setAttribute('lang', localStorage.getItem('if22-lang') || 'tr');</script>
+    <script src="bg.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <style>
+        :root, [data-theme="dark"] {
+            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
+            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
+            --border: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] {
+            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
+            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
+            --border: rgba(0,0,0,0.08);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text-primary);
+            min-height: 100vh; display: flex; flex-direction: column;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+        ::selection { background: var(--accent); color: #fff; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 50; width: 100%;
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: var(--bg-nav); border-bottom: 1px solid var(--border);
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+        .nav-inner {
+            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
+            height: 52px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
+        .logo:hover { opacity: 0.6; }
+        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); }
+        @media (max-width: 767px) { .nav-links { display: none; } }
+        .nav-controls { display: flex; align-items: center; gap: 4px; }
+        .theme-toggle, .lang-toggle {
+            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
+            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
+        }
+        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
+        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
+
+        main {
+            position: relative; z-index: 1; flex-grow: 1;
+            max-width: 720px; margin: 0 auto;
+            padding: 72px max(24px, 5vw) 80px; width: 100%;
+        }
+
+        .page-title {
+            font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.04em;
+            color: var(--text-primary); margin-bottom: 8px;
+            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+        }
+        .page-meta {
+            font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 56px;
+            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.22s both;
+        }
+
+        .prose { color: var(--text-secondary); line-height: 1.7; font-size: 0.9375rem; }
+        .prose p { margin-bottom: 16px; }
+        .prose p:last-child { margin-bottom: 0; }
+        .prose section { margin-bottom: 40px; }
+        .prose h2 {
+            font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
+            color: var(--text-primary); margin-bottom: 14px;
+            padding-left: 12px; border-left: 2px solid var(--accent);
+        }
+        .prose ul { list-style: none; margin: 12px 0 16px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .prose ul li { padding-left: 16px; position: relative; }
+        .prose ul li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose a { color: var(--accent); text-decoration: none; }
+        .prose a:hover { text-decoration: underline; }
+        .prose hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+        .prose .footnote { font-size: 0.8125rem; color: var(--text-secondary); }
+
+        html[lang="en"] .lang-tr { display: none; }
+        html[lang="tr"] .lang-en { display: none; }
+
+        .reveal {
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        footer { position: relative; z-index: 1; margin-top: auto; }
+        .footer-inner {
+            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
+        .footer-inner a:hover { color: var(--text-primary); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">IF22 Software</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+                    <li><a href="apps.html" data-i18n="nav.apps">Uygulamalar</a></li>
+                    <li><a href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title"><span class="lang-tr">Şartlar ve Koşullar</span><span class="lang-en">Terms &amp; Conditions</span></h1>
+        <p class="page-meta">
+            <span class="lang-tr">Net Sayacım &mdash; IF22 Software &mdash; Yürürlük: 14.06.2026</span>
+            <span class="lang-en">Net Sayacım &mdash; IF22 Software &mdash; Effective: 2026-06-14</span>
+        </p>
+
+        <div class="prose" id="content">
+
+            <!-- ===================== TÜRKÇE ===================== -->
+            <div class="lang-block lang-tr">
+                <p>Bu şartlar ve koşullar, <strong>IF22 Software</strong> (bundan sonra "Hizmet Sağlayıcı" olarak anılacaktır) tarafından bir Freemium hizmeti olarak oluşturulan mobil cihazlara yönelik <strong>Net Sayacım</strong> uygulaması (bundan sonra "Uygulama" olarak anılacaktır) için geçerlidir.</p>
+
+                <section>
+                    <h2>Şartların Kabulü</h2>
+                    <p>Uygulamayı indirerek, kaydolarak veya kullanarak bu Şartlar ve Koşullar ile bağlı olmayı kabul edersiniz. Bu şartların herhangi bir bölümünü kabul etmiyorsanız, Uygulamayı kullanmamalısınız. Uygulamayı kullanmaya devam etmek, bu şartların ve gelecekteki güncellemelerinin kabulü olarak değerlendirilir.</p>
+                </section>
+
+                <section>
+                    <h2>Uygulamanın Kullanımı</h2>
+                    <p>Uygulama, öğrencilerin çalışma ilerlemelerini ve deneme sınavı sonuçlarını takip etmelerine ve yaklaşık puan ve sıralama tahminlerini görmelerine yardımcı olmak için sunulur. Hizmet Sağlayıcı, size sahip olduğunuz veya kontrol ettiğiniz cihazlarda Uygulamayı kullanmanız için kişisel, devredilemez, münhasır olmayan bir lisans verir.</p>
+                    <p>Uygulamayı yalnızca yasal amaçlarla ve başkalarının Uygulamayı kullanımını ihlal etmeyecek, kısıtlamayacak veya engellemeyecek şekilde kullanmayı kabul edersiniz. Hesap kimlik bilgilerinizin gizliliğini korumaktan ve hesabınız altında gerçekleşen tüm etkinliklerden siz sorumlusunuz.</p>
+                </section>
+
+                <section>
+                    <h2>Puan ve Sıralama Tahminleri</h2>
+                    <p>Uygulamada gösterilen netler, tahmini puanlar ve sıralama tahminleri, geçmiş ve kamuya açık sınav puan tablolarından interpolasyon kullanılarak hesaplanır. Bu rakamlar <strong>yalnızca bilgilendirme amaçlı sunulan yaklaşık değerlerdir</strong>. Resmi sonuçlar değildir ve herhangi bir gerçek sınav puanını, sıralamasını veya yerleştirme sonucunu garanti etmez. Hizmet Sağlayıcı, bu tahminlere güvenilerek verilen herhangi bir karardan sorumlu değildir.</p>
+                </section>
+
+                <section>
+                    <h2>Kullanıcı İçeriği</h2>
+                    <p>Deneme sonuçlarınız ve konu ilerlemeniz gibi Uygulamaya girdiğiniz verilerin sahipliği sizde kalır. Uygulamayı kullanarak, Hizmet Sağlayıcıya bu verileri yalnızca <a href="netsayacim_privacy_policy.html">Gizlilik Politikası</a>'nda açıklandığı şekilde Uygulamanın özelliklerini sağlamak için saklama ve işleme izni verirsiniz.</p>
+                </section>
+
+                <section>
+                    <h2>Fikri Mülkiyet</h2>
+                    <p>Tasarımı, içeriği, logoları ve temel yazılımı dahil Uygulama, Hizmet Sağlayıcıya aittir ve geçerli fikri mülkiyet yasalarıyla korunmaktadır. Yasaların izin verdiği durumlar veya Hizmet Sağlayıcının yazılı izni dışında, Uygulamanın hiçbir bölümünü kopyalayamaz, değiştiremez, dağıtamaz, satamaz veya kiralayamaz, ne de tersine mühendislik yapamaz veya kaynak kodunu çıkarmaya çalışamazsınız.</p>
+                </section>
+
+                <section>
+                    <h2>Üçüncü Taraf Hizmetleri</h2>
+                    <p>Uygulama, kendi şartlarına ve gizlilik politikalarına tabi olan Google Firebase dahil üçüncü taraf hizmetlerine dayanır. Hizmet Sağlayıcı, bu üçüncü tarafların uygulamalarından sorumlu değildir.</p>
+                </section>
+
+                <section>
+                    <h2>Garanti Reddi</h2>
+                    <p>Uygulama, açık veya zımni hiçbir garanti olmaksızın "OLDUĞU GİBİ" ve "MEVCUT OLDUĞU ŞEKİLDE" sunulur. Hizmet Sağlayıcı, Uygulamanın kesintisiz, hatasız veya zararlı bileşenlerden arınmış olacağını ya da sağladığı bilgilerin doğru veya eksiksiz olduğunu garanti etmez.</p>
+                </section>
+
+                <section>
+                    <h2>Sorumluluğun Sınırlandırılması</h2>
+                    <p>Yasaların izin verdiği azami ölçüde, Hizmet Sağlayıcı; akademik sonuçlar, sınav sonuçları veya veri kaybı dahil ancak bunlarla sınırlı olmamak üzere, Uygulamayı kullanmanızdan veya kullanamamanızdan kaynaklanan doğrudan, dolaylı, arızi veya sonuç olarak ortaya çıkan hiçbir zarardan sorumlu olmayacaktır.</p>
+                </section>
+
+                <section>
+                    <h2>Fesih</h2>
+                    <p>Uygulamayı istediğiniz zaman kullanmayı bırakabilir ve hesabınızı ve ilişkili verileri Uygulama içinden silebilirsiniz (Ayarlar → Hesabı Sil). Hizmet Sağlayıcı, bu şartları ihlal eden herhangi bir kullanıcının Uygulamaya erişimini askıya alma veya sonlandırma hakkını saklı tutar.</p>
+                </section>
+
+                <section>
+                    <h2>Bu Şartlardaki Değişiklikler</h2>
+                    <p>Hizmet Sağlayıcı, bu Şartlar ve Koşulları zaman zaman güncelleyebilir. Herhangi bir değişiklik için bu sayfayı periyodik olarak gözden geçirmeniz önerilir. Değişiklikler yayınlandıktan sonra Uygulamayı kullanmaya devam etmeniz, revize edilen şartları kabul ettiğiniz anlamına gelir.</p>
+                    <p>Bu şartlar <strong>14.06.2026</strong> tarihinden itibaren geçerlidir.</p>
+                </section>
+
+                <section>
+                    <h2>Bize Ulaşın</h2>
+                    <p>Bu Şartlar ve Koşullar hakkında herhangi bir sorunuz varsa, lütfen <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a> e-posta adresinden Hizmet Sağlayıcı ile iletişime geçin.</p>
+                </section>
+            </div>
+
+            <!-- ===================== ENGLISH ===================== -->
+            <div class="lang-block lang-en">
+                <p>These terms and conditions apply to the <strong>Net Sayacım</strong> app (hereby referred to as "Application") for mobile devices that was created by <strong>IF22 Software</strong> (hereby referred to as "Service Provider") as a Freemium service.</p>
+
+                <section>
+                    <h2>Acceptance of Terms</h2>
+                    <p>By downloading, registering for, or using the Application, you agree to be bound by these Terms &amp; Conditions. If you do not agree with any part of these terms, you should not use the Application. Continued use of the Application is considered acceptance of these terms and any future updates to them.</p>
+                </section>
+
+                <section>
+                    <h2>Use of the Application</h2>
+                    <p>The Application is provided to help students track their study progress and practice exam (deneme) results, and to view approximate score and ranking estimates. The Service Provider grants you a personal, non-transferable, non-exclusive license to use the Application on devices that you own or control.</p>
+                    <p>You agree to use the Application only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use of the Application. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.</p>
+                </section>
+
+                <section>
+                    <h2>Score and Ranking Estimates</h2>
+                    <p>Net scores, estimated points, and ranking estimates shown in the Application are calculated from historical, publicly available exam score tables using interpolation. These figures are <strong>approximations provided for informational purposes only</strong>. They are not official results and do not guarantee any actual exam score, ranking, or placement outcome. The Service Provider is not responsible for any decision made in reliance on these estimates.</p>
+                </section>
+
+                <section>
+                    <h2>User Content</h2>
+                    <p>You retain ownership of the data you enter into the Application, such as your trial results and topic progress. By using the Application, you grant the Service Provider permission to store and process this data solely to provide the Application's features, as described in the <a href="netsayacim_privacy_policy.html">Privacy Policy</a>.</p>
+                </section>
+
+                <section>
+                    <h2>Intellectual Property</h2>
+                    <p>The Application, including its design, content, logos, and underlying software, is owned by the Service Provider and is protected by applicable intellectual property laws. You may not copy, modify, distribute, sell, or lease any part of the Application, nor reverse-engineer or attempt to extract its source code, unless permitted by law or with the Service Provider's written consent.</p>
+                </section>
+
+                <section>
+                    <h2>Third-Party Services</h2>
+                    <p>The Application relies on third-party services, including Google Firebase, which are subject to their own terms and privacy policies. The Service Provider is not responsible for the practices of these third parties.</p>
+                </section>
+
+                <section>
+                    <h2>Disclaimer of Warranties</h2>
+                    <p>The Application is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. The Service Provider does not warrant that the Application will be uninterrupted, error-free, or free of harmful components, or that the information it provides is accurate or complete.</p>
+                </section>
+
+                <section>
+                    <h2>Limitation of Liability</h2>
+                    <p>To the maximum extent permitted by law, the Service Provider shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, the Application, including but not limited to academic outcomes, exam results, or loss of data.</p>
+                </section>
+
+                <section>
+                    <h2>Termination</h2>
+                    <p>You may stop using the Application at any time and may delete your account and associated data from within the Application (Settings → Delete Account). The Service Provider reserves the right to suspend or terminate access to the Application for any user who violates these terms.</p>
+                </section>
+
+                <section>
+                    <h2>Changes to These Terms</h2>
+                    <p>The Service Provider may update these Terms &amp; Conditions from time to time. You are advised to review this page periodically for any changes. Continued use of the Application after changes are posted constitutes your acceptance of the revised terms.</p>
+                    <p>These terms are effective as of <strong>2026-06-14</strong>.</p>
+                </section>
+
+                <section>
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions about these Terms &amp; Conditions, please contact the Service Provider via email at <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a>.</p>
+                </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
+            <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
+        </div>
+    </footer>
+
+    <script>
+        const html = document.documentElement;
+        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
+        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
+        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+        document.querySelectorAll('.lang-block > p, .lang-block > section').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
