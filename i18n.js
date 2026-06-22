@@ -35,6 +35,7 @@
             'apps.pomoquest.store':   'App Store\'da İncele',
             'apps.pomoquest.privacy': 'Gizlilik Politikası',
             'apps.spendwise.desc':    'Faturalarını ve dijital aboneliklerini tek yerden takip et. Son ödeme tarihlerinde bildirim al, aylık harcama grafiklerini gör. Türkiye pazarına özel TL bazlı fatura ve abonelik yöneticisi.',
+            'apps.spendwise.store':   'App Store\'da İncele',
 
             'pp.pomoquest.title': 'Gizlilik Politikası',
             'pp.pomoquest.meta':  'PomoQuest — IF22 Software — Geçerlilik tarihi: 30 Nisan 2026',
@@ -127,6 +128,7 @@
             'apps.pomoquest.store':   'View on App Store',
             'apps.pomoquest.privacy': 'Privacy Policy',
             'apps.spendwise.desc':    'Track your bills and subscriptions in one place. Get notified before due dates, view monthly spending charts. A TL-based bill and subscription manager built for the Turkish market.',
+            'apps.spendwise.store':   'View on App Store',
 
             'pp.pomoquest.title': 'Privacy Policy',
             'pp.pomoquest.meta':  'PomoQuest — IF22 Software — Effective 2026-04-30',
