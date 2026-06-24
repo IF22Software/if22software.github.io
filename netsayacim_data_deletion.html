@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Net Sayacım — Hesap ve Veri Silme</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      color: #1c1c22;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    h2 { font-size: 1.15rem; margin-top: 32px; }
+    .muted { color: #6b6b76; font-size: 0.9rem; }
+    a { color: #b8860b; }
+    ol, ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    code { background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 6px; }
+    .card {
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e8e8ee; background: #16161c; }
+      .muted { color: #9a9aa6; }
+      .card { border-color: rgba(255,255,255,0.12); }
+      code { background: rgba(255,255,255,0.1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Hesap ve Veri Silme</h1>
+  <p class="muted">Net Sayacım uygulaması — Geliştirici: IF22 Software</p>
+
+  <p>
+    Bu sayfa, <strong>Net Sayacım</strong> (geliştirici <strong>IF22 Software</strong>)
+    kullanıcılarının hesaplarını ve hesaplarına bağlı tüm verileri nasıl
+    silebileceğini açıklar.
+  </p>
+
+  <h2>1. Uygulama içinden silme (önerilen)</h2>
+  <div class="card">
+    <ol>
+      <li>Net Sayacım uygulamasını aç ve hesabınla giriş yap.</li>
+      <li><strong>Profil</strong> sekmesine git.</li>
+      <li><strong>Hesabı Sil</strong> seçeneğine dokun.</li>
+      <li>Onayladığında hesabın ve tüm verilerin <strong>kalıcı olarak</strong> silinir. Bu işlem geri alınamaz.</li>
+    </ol>
+  </div>
+
+  <h2>2. E-posta ile talep</h2>
+  <p>
+    Uygulamaya erişemiyorsan, hesabını silmek için
+    <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a> adresine,
+    hesabına kayıtlı e-posta adresinden bir silme talebi gönderebilirsin.
+    Talebini en geç <strong>30 gün</strong> içinde işleme alırız.
+  </p>
+
+  <h2>3. Silinen veriler</h2>
+  <p>Hesap silindiğinde aşağıdaki verilerin <strong>tamamı kalıcı olarak silinir</strong>:</p>
+  <ul>
+    <li>Ad ve e-posta adresi (hesap bilgileri)</li>
+    <li>Tüm deneme/net kayıtların ve istatistiklerin</li>
+    <li>Konu ilerlemeleri ve hedeflerin</li>
+    <li>Kaydettiğin sorular, klasörler ve yüklediğin fotoğraflar</li>
+    <li>Sınav profillerin ve tüm uygulama içi içeriğin</li>
+  </ul>
+
+  <h2>4. Saklanan veriler ve süreler</h2>
+  <p>
+    Satın alma ve abonelik kayıtları, yasal ve muhasebe yükümlülükleri gereği
+    Google Play ve ödeme altyapımız (RevenueCat) tarafında sınırlı süreyle
+    tutulabilir; bu kayıtlar silinen hesabınla yeniden ilişkilendirilmez.
+    Teknik yedeklerde kalan veriler en fazla <strong>90 gün</strong> içinde
+    tamamen silinir.
+  </p>
+
+  <p class="muted" style="margin-top:32px">
+    Sorularınız için: <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a>
+  </p>
+</body>
+</html>
