@@ -93,17 +93,33 @@
             width: 88px; height: 88px; border-radius: 50%;
             background: var(--bg-avatar); border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center;
-            font-size: 38px; margin-bottom: 22px; flex-shrink: 0;
+            font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em;
+            color: var(--text-primary); margin-bottom: 22px; flex-shrink: 0;
             transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
         }
         .card:hover .avatar { transform: scale(1.06); }
+
+        .avatar-img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
+        .avatar-fallback {
+            width: 100%; height: 100%; display: none; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, rgba(41,151,255,0.14), rgba(255,255,255,0.02));
+        }
 
         .member-name { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 4px; }
         .member-role { font-size: 0.8125rem; font-weight: 500; color: var(--accent); margin-bottom: 14px; }
         .member-bio { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 22px; flex-grow: 1; }
-        .member-links { display: flex; gap: 16px; justify-content: center; }
-        .member-link { font-size: 0.875rem; color: var(--accent); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
-        .member-link:hover { opacity: 0.7; }
+        .member-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .member-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 10px 16px; border-radius: 980px;
+            background: var(--accent); color: #fff; text-decoration: none;
+            font-size: 0.875rem; font-weight: 500; transition: filter 0.2s, transform 0.18s;
+        }
+        .member-link:hover { filter: brightness(1.08); transform: scale(0.98); }
 
         .reveal {
             opacity: 0; transform: scale(0.96) translateY(18px);
@@ -161,23 +177,29 @@
         <div class="section">
             <div class="team-grid">
                 <div class="card reveal reveal-d1">
-                    <div class="avatar">👨‍💻</div>
+                    <div class="avatar" aria-hidden="true">
+                        <img src="pp/ibra.jpg" alt="İbrahim Binbuğa" class="avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="avatar-fallback">IB</span>
+                    </div>
                     <p class="member-name">İbrahim Binbuğa</p>
                     <p class="member-role">Co-Founder & Developer</p>
                     <p class="member-bio" data-i18n="team.ibrahim.bio">Yazılım Mühendisliği son sınıf öğrencisi. Flutter ve iOS ile mobil uygulama geliştirme, AI entegrasyonları ve App Store yayın süreçleri üzerine deneyim sahibidir.</p>
                     <div class="member-links">
-                        <a href="https://www.linkedin.com/in/ibrahim-binbu%C4%9Fa/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn →</a>
-                        <a href="https://github.com/ibrahimbinbuga" target="_blank" rel="noopener noreferrer" class="member-link">GitHub →</a>
+                        <a href="https://www.linkedin.com/in/ibrahim-binbu%C4%9Fa/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn</a>
+                        <a href="https://github.com/ibrahimbinbuga" target="_blank" rel="noopener noreferrer" class="member-link">GitHub</a>
                     </div>
                 </div>
                 <div class="card reveal reveal-d2">
-                    <div class="avatar">👩‍💻</div>
+                    <div class="avatar" aria-hidden="true">
+                        <img src="pp/fet.jpg" alt="Fethiye Sarı" class="avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="avatar-fallback">FS</span>
+                    </div>
                     <p class="member-name">Fethiye Sarı</p>
                     <p class="member-role">Co-Founder & Developer</p>
                     <p class="member-bio" data-i18n="team.fethiye.bio">Yazılım Mühendisliği son sınıf öğrencisi. Flutter ile çok platformlu mobil uygulamalar geliştirir; backend entegrasyonları ve AI destekli ürün geliştirme üzerine odaklanır.</p>
                     <div class="member-links">
-                        <a href="https://www.linkedin.com/in/fethiye-sari/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn →</a>
-                        <a href="https://github.com/fethiyesari" target="_blank" rel="noopener noreferrer" class="member-link">GitHub →</a>
+                        <a href="https://www.linkedin.com/in/fethiye-sari/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn</a>
+                        <a href="https://github.com/fethiyesari" target="_blank" rel="noopener noreferrer" class="member-link">GitHub</a>
                     </div>
                 </div>
             </div>

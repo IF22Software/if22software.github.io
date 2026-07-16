@@ -91,10 +91,19 @@
             width: 64px; height: 64px; background: var(--bg);
             border: 1px solid var(--border); border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 30px; margin-bottom: 20px; flex-shrink: 0;
+            font-size: 30px; margin-bottom: 20px; flex-shrink: 0; overflow: hidden;
             transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
         }
         .card:hover .card-icon { transform: scale(1.08) rotate(3deg); }
+
+        .app-logo-img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .app-logo-fallback {
+            width: 100%; height: 100%; display: none; align-items: center; justify-content: center;
+            font-size: 0.95rem; font-weight: 700; letter-spacing: -0.04em; color: var(--text-primary);
+            background: linear-gradient(135deg, rgba(41,151,255,0.14), rgba(255,255,255,0.02));
+        }
 
         .card-title { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 8px; }
         .card-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; flex-grow: 1; margin-bottom: 24px; }
@@ -184,7 +193,10 @@
         <div class="section">
             <div class="cards-grid">
                 <div class="card reveal reveal-d1">
-                    <div class="card-icon">🔮</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/dreamoracle.png" alt="Dream Oracle logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">DO</span>
+                    </div>
                     <p class="card-title">Dream Oracle</p>
                     <p class="card-desc" data-i18n="apps.dreamoracle.desc">Google Gemini AI gücüyle rüyalarınızın psikolojik ve mistik analizini saniyeler içinde öğrenin. App Store'da yayında!</p>
                     <div class="card-actions">
@@ -193,7 +205,10 @@
                     </div>
                 </div>
                 <div class="card reveal reveal-d2">
-                    <div class="card-icon">⏱️</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/pomoquest.png" alt="PomoQuest logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">PQ</span>
+                    </div>
                     <p class="card-title">PomoQuest</p>
                     <p class="card-desc" data-i18n="apps.pomoquest.desc">Pomodoro tekniğini oyunlaştırılmış bir deneyimle birleştiren odaklanma uygulaması. XP kazan, seviye atla, pixel art avatarını özelleştir.</p>
                     <div class="card-actions">
@@ -202,7 +217,10 @@
                     </div>
                 </div>
                 <div class="card card-soon reveal reveal-d3">
-                    <div class="card-icon">🎁</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/giftie.png" alt="Giftie logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">GI</span>
+                    </div>
                     <p class="card-title">Giftie</p>
                     <p class="card-desc" data-i18n="apps.giftie.desc">Sevdikleriniz için mükemmel hediyeyi bulmak artık çok kolay. Yapay zeka destekli kişiselleştirilmiş hediye önerileri.</p>
                     <div class="card-actions">
@@ -211,7 +229,10 @@
                     </div>
                 </div>
                 <div class="card card-soon reveal reveal-d3">
-                    <div class="card-icon">🔍</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/checkmybite.png" alt="CheckMyBite logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">CB</span>
+                    </div>
                     <p class="card-title" lang="en">CheckMyBite</p>
                     <p class="card-desc" data-i18n="apps.checkmybite.desc">Fotoğraf çek, yapay zeka analiz etsin. Ürünlerin içerikleri, alerjenler ve besin değerleri hakkında anında bilgi al. Özel beslenme tercihleri veya hassasiyetleri olanlar için tasarlandı.</p>
                     <div class="card-actions">
@@ -221,7 +242,10 @@
                     </div>
                 </div>
                 <div class="card reveal reveal-d3">
-                    <div class="card-icon">💸</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/spendwise.png" alt="SpendWise logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">SW</span>
+                    </div>
                     <p class="card-title">SpendWise</p>
                     <p class="card-desc" data-i18n="apps.spendwise.desc">Faturalarını ve dijital aboneliklerini tek yerden takip et. Son ödeme tarihlerinde bildirim al, aylık harcama grafiklerini gör. Türkiye pazarına özel TL bazlı fatura ve abonelik yöneticisi.</p>
                     <div class="card-actions">
@@ -231,11 +255,15 @@
                     </div>
                 </div>
                 <div class="card card-soon reveal reveal-d1">
-                    <div class="card-icon">🎯</div>
+                    <div class="card-icon" aria-hidden="true">
+                        <img src="logos/netsayacim.png" alt="Net Sayacım logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <span class="app-logo-fallback">NS</span>
+                    </div>
                     <p class="card-title" lang="tr">Net Sayacım</p>
                     <p class="card-desc" data-i18n="apps.netsayacim.desc">ÖSYM sınavlarına (YKS, KPSS, ALES, TUS, YDS) hazırlananlar için sınav takip uygulaması. Hedef net belirle, konu ilerlemeni ve deneme sonuçlarını takip et, çözemediğin soruların fotoğrafını çekip klasörle, geçmiş yıllara dayalı tahmini sıralamanı gör.</p>
                     <div class="card-actions">
-                        <span class="badge-soon" data-i18n="apps.soon">Yakında</span>
+                        <a href="https://play.google.com/store/apps/details?id=com.if22software.net_sayacim&pcampaignid=web_share" target="_blank" class="btn-store" data-i18n="apps.netsayacim.play">Google Play'de İncele</a>
+                        <a href="https://apps.apple.com/tr/app/net-sayac%C4%B1m-s%C4%B1nav-takibi/id6783307079?l=tr" target="_blank" class="btn-store" data-i18n="apps.netsayacim.appstore">App Store'da İncele</a>
                         <a href="netsayacim_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
                         <a href="netsayacim_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
                     </div>
