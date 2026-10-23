@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanım Koşulları — Hibi | IF22 Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>document.documentElement.setAttribute('lang', localStorage.getItem('if22-lang') || 'tr');</script>
+    <script src="bg.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <style>
+        :root, [data-theme="dark"] {
+            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
+            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
+            --border: rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] {
+            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
+            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
+            --border: rgba(0,0,0,0.08);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text-primary);
+            min-height: 100vh; display: flex; flex-direction: column;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+        ::selection { background: var(--accent); color: #fff; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 50; width: 100%;
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: var(--bg-nav); border-bottom: 1px solid var(--border);
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+        .nav-inner {
+            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
+            height: 52px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
+        .logo:hover { opacity: 0.6; }
+        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); }
+        @media (max-width: 767px) { .nav-links { display: none; } }
+        .nav-controls { display: flex; align-items: center; gap: 4px; }
+        .theme-toggle, .lang-toggle {
+            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
+            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
+        }
+        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
+        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
+
+        main {
+            position: relative; z-index: 1; flex-grow: 1;
+            max-width: 720px; margin: 0 auto;
+            padding: 72px max(24px, 5vw) 80px; width: 100%;
+        }
+
+        .page-title {
+            font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.04em;
+            color: var(--text-primary); margin-bottom: 8px;
+            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+        }
+        .page-meta {
+            font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 56px;
+            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.22s both;
+        }
+
+        .prose { color: var(--text-secondary); line-height: 1.7; font-size: 0.9375rem; }
+        .prose p { margin-bottom: 16px; }
+        .prose p:last-child { margin-bottom: 0; }
+        .prose section { margin-bottom: 40px; }
+        .prose h2 {
+            font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
+            color: var(--text-primary); margin-bottom: 14px;
+            padding-left: 12px; border-left: 2px solid var(--accent);
+        }
+        .prose ul { list-style: none; margin: 12px 0 16px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .prose ul li { padding-left: 16px; position: relative; }
+        .prose ul li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose a { color: var(--accent); text-decoration: none; }
+        .prose a:hover { text-decoration: underline; }
+        .prose hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+        .prose .footnote { font-size: 0.8125rem; color: var(--text-secondary); }
+
+        html[lang="en"] .lang-tr { display: none; }
+        html[lang="tr"] .lang-en { display: none; }
+
+        .reveal {
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        footer { position: relative; z-index: 1; margin-top: auto; }
+        .footer-inner {
+            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
+        .footer-inner a:hover { color: var(--text-primary); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">IF22 Software</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+                    <li><a href="apps.html" data-i18n="nav.apps">Uygulamalar</a></li>
+                    <li><a href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title"><span class="lang-tr">Kullanım Koşulları</span><span class="lang-en">Terms of Use</span></h1>
+        <p class="page-meta"><span class="lang-tr">Hibi (日々) &mdash; IF22 Software &mdash; Yürürlük: 2026-10-23</span><span class="lang-en">Hibi (日々) &mdash; IF22 Software &mdash; Effective: 2026-10-23</span></p>
+
+        <div class="prose" id="content">
+            <div class="lang-block lang-tr">
+            <p>Bu koşullar, <strong>IF22 Software</strong> tarafından geliştirilen <strong>Hibi (日々)</strong> uygulamasının kullanımını düzenler. Uygulamayı kullanarak bu koşulları kabul etmiş olursun.</p>
+            <section>
+                <h2>Hesap</h2>
+                <p>Uygulamayı kullanmak için bir hesap açarsın. Hesabının güvenliğinden ve hesabınla yapılan işlemlerden sen sorumlusun.</p>
+            </section>
+            <section>
+                <h2>İçeriğin</h2>
+                <p>Ajandana yazdığın, çizdiğin ve eklediğin her şey sana aittir. Biz yalnızca bunları saklamak, eşitlemek ve sana göstermek için kullanırız.</p>
+            </section>
+            <section>
+                <h2>Hibi Plus</h2>
+                <p>Ücretsiz sürümde en fazla iki ajanda oluşturabilirsin. Hibi Plus aylık ya da yıllık bir aboneliktir; sınırsız ajanda, fotoğraf yedeği ve ek özellikler sunar. Abonelik, App Store ya da Google Play hesabın üzerinden alınır, her dönemin sonunda kendiliğinden yenilenir ve mağaza ayarlarından istediğin zaman iptal edilebilir. İptal edersen Plus, ödediğin dönemin sonuna kadar açık kalır. İadeler mağazanın kurallarına tabidir.</p>
+            </section>
+            <section>
+                <h2>Kullanım kuralları</h2>
+                <p>Uygulamayı yasalara aykırı amaçlarla kullanmamayı, hizmeti bozmaya ya da başkalarının verisine erişmeye çalışmamayı kabul edersin.</p>
+            </section>
+            <section>
+                <h2>Sorumluluk</h2>
+                <p>Uygulama "olduğu gibi" sunulur. Verilerini korumak için özen gösteririz ancak kesintisiz ve hatasız çalışacağını garanti etmeyiz. Önemli bilgilerini ayrıca saklamanı öneririz.</p>
+            </section>
+            <section>
+                <h2>Değişiklikler ve sona erme</h2>
+                <p>Bu koşullar güncellenebilir; değişiklikler bu sayfada yayınlanır. Hesabını istediğin zaman silebilirsin. Yürürlük tarihi: <strong>2026-10-23</strong>.</p>
+            </section>
+            <section>
+                <h2>İletişim</h2>
+                <p>Sorularınız için: <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a></p>
+            </section>
+            </div>
+            <div class="lang-block lang-en">
+            <p>These terms govern your use of <strong>Hibi (日々)</strong>, created by <strong>IF22 Software</strong>. By using the app you agree to them.</p>
+            <section>
+                <h2>Account</h2>
+                <p>You create an account to use the app and are responsible for keeping it secure.</p>
+            </section>
+            <section>
+                <h2>Your content</h2>
+                <p>Everything you write, draw and add to your planner belongs to you. We only use it to store, sync and show it to you.</p>
+            </section>
+            <section>
+                <h2>Hibi Plus</h2>
+                <p>The free version allows up to two planners. Hibi Plus is a monthly or yearly subscription offering unlimited planners, photo backup and extra features. It is purchased through your App Store or Google Play account, renews automatically at the end of each period and can be cancelled any time in your store settings. If you cancel, Plus stays active until the end of the paid period. Refunds follow the store's rules.</p>
+            </section>
+            <section>
+                <h2>Acceptable use</h2>
+                <p>You agree not to use the app unlawfully, disrupt the service or try to access other people's data.</p>
+            </section>
+            <section>
+                <h2>Liability</h2>
+                <p>The app is provided "as is". We take care to protect your data but do not guarantee uninterrupted or error-free operation.</p>
+            </section>
+            <section>
+                <h2>Changes and termination</h2>
+                <p>These terms may be updated; changes are published on this page. You can delete your account at any time. Effective as of <strong>2026-10-23</strong>.</p>
+            </section>
+            <section>
+                <h2>Contact</h2>
+                <p>For questions: <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a></p>
+            </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
+            <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
+        </div>
+    </footer>
+
+    <script>
+        const html = document.documentElement;
+        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
+        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
+        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+        document.querySelectorAll('.lang-block > p, .lang-block > section').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
