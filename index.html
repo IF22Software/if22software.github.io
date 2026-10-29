@@ -28,7 +28,7 @@
             display: block;
             border: 3px solid var(--line);
             border-radius: 24%;
-            box-shadow: 5px 5px 0 var(--line);
+            box-shadow: 5px 5px 0 var(--shadow-c);
             touch-action: none;
             user-select: none; -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -42,7 +42,7 @@
             border-radius: calc(24% - 2px);
             pointer-events: none;
         }
-        .floater.held { cursor: grabbing; z-index: 4; box-shadow: 10px 10px 0 var(--line); }
+        .floater.held { cursor: grabbing; z-index: 4; box-shadow: 10px 10px 0 var(--shadow-c); }
         .floater .tag {
             position: absolute; left: 50%; top: calc(100% + 12px);
             transform: translateX(-50%);

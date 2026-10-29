@@ -1,8 +1,9 @@
-/* App catalogue — drives the floating logos (index), the grid (apps) and the detail pages (app.html?app=…).
+/* App catalogue (sorted newest first by `added` at the bottom) — drives the floating logos (index), the grid (apps) and the detail pages (app.html?app=…).
    Screenshots live in screens/<id>/1.jpg … <screens>.jpg (pulled from the App Store listing). */
 window.IF22_APPS = [
     {
         id: 'hibi',
+        added: '2026-10-23',
         name: 'Hibi 日々',
         logo: 'logos/hibi.png',
         color: '#F3E3C7',
@@ -30,6 +31,7 @@ window.IF22_APPS = [
     },
     {
         id: 'pawfecttime',
+        added: '2026-10-28',
         name: 'Pawfect Time',
         logo: 'logos/pawfecttime.png',
         color: '#F7BBAE',
@@ -57,6 +59,7 @@ window.IF22_APPS = [
     },
     {
         id: 'netsayacim',
+        added: '2026-06-16',
         name: 'Net Sayacım',
         logo: 'logos/netsayacim.png',
         color: '#FFD23F',
@@ -87,6 +90,7 @@ window.IF22_APPS = [
     },
     {
         id: 'pomoquest',
+        added: '2026-04-30',
         name: 'PomoQuest',
         logo: 'logos/pomoquest.png',
         color: '#FFB3CF',
@@ -114,6 +118,7 @@ window.IF22_APPS = [
     },
     {
         id: 'spendwise',
+        added: '2026-05-10',
         name: 'SpendWise',
         logo: 'logos/spendwise.png',
         color: '#9BE59B',
@@ -142,6 +147,7 @@ window.IF22_APPS = [
     },
     {
         id: 'dreamoracle',
+        added: '2026-03-25',
         name: 'Dream Oracle',
         logo: 'logos/dreamoracle.png',
         color: '#C3B5FF',
@@ -169,6 +175,7 @@ window.IF22_APPS = [
     },
     {
         id: 'checkmybite',
+        added: '2026-04-25',
         name: 'CheckMyBite',
         initials: 'CB',
         color: '#8FD3FF',
@@ -192,6 +199,7 @@ window.IF22_APPS = [
     },
     {
         id: 'giftie',
+        added: '2026-04-03',
         name: 'Giftie',
         initials: 'GI',
         color: '#FF9F5A',
@@ -213,3 +221,6 @@ window.IF22_APPS = [
         ]
     }
 ];
+
+// Newest first everywhere the list is shown.
+window.IF22_APPS.sort(function (a, b) { return a.added < b.added ? 1 : a.added > b.added ? -1 : 0; });

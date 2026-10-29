@@ -13,17 +13,35 @@
     --blue: #8FD3FF;
     --green: #9BE59B;
     --orange: #FF9F5A;
-    --shadow: 4px 4px 0 var(--line);
-    --shadow-lg: 7px 7px 0 var(--line);
+    --shadow-c: #111111;
+    --app-tone: 100%;          /* how much of an app's own color shows (dark mode tones it down) */
+    --shadow: 4px 4px 0 var(--shadow-c);
+    --shadow-lg: 7px 7px 0 var(--shadow-c);
 }
+/* Dark: warm near-black, cream outlines, violet hard shadows, softened pastels */
 [data-theme="dark"] {
-    --bg: #17161A;
-    --surface: #24222A;
-    --ink: #F6EFE2;
-    --muted: #BDB5A8;
-    --line: #F6EFE2;
-    --dot: rgba(246,239,226,0.10);
+    --bg: #131117;
+    --surface: #1F1C25;
+    --ink: #F3ECDF;
+    --muted: #B3AA9C;
+    --line: #E9E1D2;
+    --dot: rgba(233,225,210,0.09);
+    --yellow: #F4C842;
+    --pink: #EE8DB3;
+    --blue: #7DC1EC;
+    --green: #8AD39B;
+    --orange: #F09A5F;
+    --shadow-c: #8E7CF8;
+    --app-tone: 82%;
+    --shadow: 4px 4px 0 var(--shadow-c);
+    --shadow-lg: 7px 7px 0 var(--shadow-c);
 }
+[data-theme="dark"] .site-header { background: #18151D; }
+[data-theme="dark"] .nav-links a.active { background: var(--yellow); color: var(--on-color); }
+[data-theme="dark"] .logo { box-shadow: 3px 3px 0 var(--shadow-c); }
+
+/* An app's color block; set --app-color inline. Dark mode mixes it toward the background. */
+.app-bg, .box.app-bg { background: color-mix(in srgb, var(--app-color) var(--app-tone), #131117); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-font-smoothing: antialiased; }
@@ -64,7 +82,7 @@ a { color: inherit; }
     text-decoration: none; color: var(--on-color);
     background: var(--yellow);
     border: 3px solid var(--line);
-    box-shadow: 3px 3px 0 var(--line);
+    box-shadow: 3px 3px 0 var(--shadow-c);
     padding: 4px 10px;
     transform: rotate(-2deg);
     transition: transform 0.15s;
@@ -87,7 +105,7 @@ a { color: inherit; }
 .theme-toggle, .lang-toggle {
     width: 38px; height: 38px;
     border: 3px solid var(--line); background: var(--surface);
-    box-shadow: 3px 3px 0 var(--line);
+    box-shadow: 3px 3px 0 var(--shadow-c);
     cursor: pointer; color: var(--ink);
     display: flex; align-items: center; justify-content: center;
     padding: 0;
@@ -115,7 +133,7 @@ a { color: inherit; }
     text-decoration: none; cursor: pointer;
     transition: transform 0.1s, box-shadow 0.1s;
 }
-.btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--line); }
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--shadow-c); }
 .btn:active { transform: translate(4px,4px); box-shadow: none; }
 .btn-white { background: var(--surface); color: var(--ink); }
 .btn-ink { background: var(--ink); color: var(--bg); }
