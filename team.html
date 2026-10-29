@@ -1,145 +1,34 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekibimiz | IF22 Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="bg.js" defer></script>
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="site.js" defer></script>
     <script src="i18n.js" defer></script>
     <style>
-        :root, [data-theme="dark"] {
-            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
-            --bg-avatar: #2C2C2E;
-            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
-            --border: rgba(255,255,255,0.1);
-            --shadow-card: 0 2px 20px rgba(0,0,0,0.5); --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
-            --aurora-a: rgba(41,151,255,0.13); --aurora-b: rgba(94,92,230,0.08); --aurora-c: rgba(0,210,255,0.06);
-        }
-        [data-theme="light"] {
-            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
-            --bg-avatar: #E5E5EA;
-            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
-            --border: rgba(0,0,0,0.08);
-            --shadow-card: 0 2px 16px rgba(0,0,0,0.06); --shadow-hover: 0 10px 32px rgba(0,0,0,0.10);
-            --aurora-a: rgba(0,113,227,0.07); --aurora-b: rgba(94,92,230,0.04); --aurora-c: rgba(0,180,255,0.04);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg); color: var(--text-primary);
-            min-height: 100vh; display: flex; flex-direction: column;
-            transition: background 0.35s ease, color 0.35s ease; overflow-x: hidden;
-        }
-        ::selection { background: var(--accent); color: #fff; }
-
-        #mouseAurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; will-change: background; }
-
-        .site-header {
-            position: sticky; top: 0; z-index: 50; width: 100%;
-            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            transition: background 0.35s ease, border-color 0.35s ease;
-        }
-        .nav-inner {
-            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
-            height: 52px; display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
-        .logo:hover { opacity: 0.6; }
-        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
-        @media (max-width: 767px) { .nav-links { display: none; } }
-        .nav-controls { display: flex; align-items: center; gap: 4px; }
-        .theme-toggle, .lang-toggle {
-            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
-            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
-        }
-        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
-        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
-
-        .page-header {
-            position: relative; z-index: 1;
-            max-width: 1080px; margin: 0 auto; padding: 80px max(24px, 5vw) 56px; width: 100%;
-        }
-        .page-title {
-            font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.04em;
-            color: var(--text-primary); margin-bottom: 12px;
-            opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.1s both;
-        }
-        .page-sub {
-            font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.6; max-width: 480px;
-            opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.25s both;
-        }
-
-        main { flex-grow: 1; }
-
-        .section { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw) 80px; width: 100%; }
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; max-width: 680px; margin: 0 auto; }
-
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px;
-            padding: 36px 28px; display: flex; flex-direction: column; align-items: center; text-align: center;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
-        }
-        .card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-hover); }
-
+        .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; padding-bottom: 80px; max-width: 900px; }
+        .member { padding: 28px; display: flex; flex-direction: column; }
+        .member:nth-child(1) { transform: rotate(-0.8deg); }
+        .member:nth-child(2) { transform: rotate(0.8deg); }
         .avatar {
-            width: 88px; height: 88px; border-radius: 50%;
-            background: var(--bg-avatar); border: 1px solid var(--border);
+            width: 96px; height: 96px;
+            border: 3px solid var(--line); box-shadow: var(--shadow);
+            overflow: hidden; margin-bottom: 20px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em;
-            color: var(--text-primary); margin-bottom: 22px; flex-shrink: 0;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-            overflow: hidden;
+            font-weight: 800; font-size: 1.75rem; color: var(--on-color);
         }
-        .card:hover .avatar { transform: scale(1.06); }
-
-        .avatar-img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-        }
-
-        .avatar-fallback {
-            width: 100%; height: 100%; display: none; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(41,151,255,0.14), rgba(255,255,255,0.02));
-        }
-
-        .member-name { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 4px; }
-        .member-role { font-size: 0.8125rem; font-weight: 500; color: var(--accent); margin-bottom: 14px; }
-        .member-bio { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 22px; flex-grow: 1; }
-        .member-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .member-link {
-            display: inline-flex; align-items: center; justify-content: center;
-            gap: 8px; padding: 10px 16px; border-radius: 980px;
-            background: var(--accent); color: #fff; text-decoration: none;
-            font-size: 0.875rem; font-weight: 500; transition: filter 0.2s, transform 0.18s;
-        }
-        .member-link:hover { filter: brightness(1.08); transform: scale(0.98); }
-
-        .reveal {
-            opacity: 0; transform: scale(0.96) translateY(18px);
-            transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-        }
-        .reveal.visible { opacity: 1; transform: scale(1) translateY(0); }
-        .reveal-d1 { transition-delay: 0.1s; }
-        .reveal-d2 { transition-delay: 0.22s; }
-
-        footer { position: relative; z-index: 1; margin-top: auto; }
-        .footer-inner {
-            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
-            border-top: 1px solid var(--border); display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 10px;
-        }
-        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
-        .footer-inner a:hover { color: var(--text-primary); }
-
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .member h2 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; }
+        .member .role { margin-top: 8px; align-self: flex-start; }
+        .member p.bio { margin-top: 14px; color: var(--muted); line-height: 1.55; flex-grow: 1; }
+        .member .links { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .member .links .btn { padding: 8px 14px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -156,52 +45,46 @@
                 </ul>
             </nav>
             <div class="nav-controls">
-            <button class="lang-toggle" id="langToggle">EN</button>
-            <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
-                <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="page-header">
-            <h1 class="page-title" data-i18n="team.title">Ekibimiz</h1>
-            <p class="page-sub" data-i18n="team.sub">IF22 Software'ın arkasındaki insanlar.</p>
-        </div>
-        <div class="section">
-            <div class="team-grid">
-                <div class="card reveal reveal-d1">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="pp/ibra.jpg" alt="İbrahim Binbuğa" class="avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="avatar-fallback">IB</span>
+        <div class="wrap">
+            <div class="page-head">
+                <h1><span class="highlight" data-i18n="team.title">Ekibimiz</span></h1>
+                <p data-i18n="team.sub">IF22 Software'ın arkasındaki insanlar.</p>
+            </div>
+            <div class="team">
+                <article class="member box">
+                    <div class="avatar" style="background:var(--blue)">
+                        <img src="pp/ibra.jpg" alt="İbrahim Binbuğa" onerror="this.parentNode.textContent='IB'">
                     </div>
-                    <p class="member-name">İbrahim Binbuğa</p>
-                    <p class="member-role">Co-Founder & Developer</p>
-                    <p class="member-bio" data-i18n="team.ibrahim.bio">Yazılım Mühendisliği son sınıf öğrencisi. Flutter ve iOS ile mobil uygulama geliştirme, AI entegrasyonları ve App Store yayın süreçleri üzerine deneyim sahibidir.</p>
-                    <div class="member-links">
-                        <a href="https://www.linkedin.com/in/ibrahim-binbu%C4%9Fa/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn</a>
-                        <a href="https://github.com/ibrahimbinbuga" target="_blank" rel="noopener noreferrer" class="member-link">GitHub</a>
+                    <h2>İbrahim Binbuğa</h2>
+                    <span class="role badge mono" style="background:var(--yellow);color:var(--on-color)">Co-Founder &amp; Developer</span>
+                    <p class="bio" data-i18n="team.ibrahim.bio">Yazılım mühendisi. Flutter ve iOS ile mobil uygulamalar geliştirir; AI entegrasyonları ve App Store yayın süreçleri üzerine deneyimlidir.</p>
+                    <div class="links">
+                        <a href="https://www.linkedin.com/in/ibrahim-binbu%C4%9Fa/" target="_blank" rel="noopener noreferrer" class="btn btn-white">LinkedIn</a>
+                        <a href="https://github.com/ibrahimbinbuga" target="_blank" rel="noopener noreferrer" class="btn btn-white">GitHub</a>
                     </div>
-                </div>
-                <div class="card reveal reveal-d2">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="pp/fet.jpg" alt="Fethiye Sarı" class="avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="avatar-fallback">FS</span>
+                </article>
+                <article class="member box">
+                    <div class="avatar" style="background:var(--pink)">
+                        <img src="pp/fet.jpg" alt="Fethiye Sarı" onerror="this.parentNode.textContent='FS'">
                     </div>
-                    <p class="member-name">Fethiye Sarı</p>
-                    <p class="member-role">Co-Founder & Developer</p>
-                    <p class="member-bio" data-i18n="team.fethiye.bio">Yazılım Mühendisliği son sınıf öğrencisi. Flutter ile çok platformlu mobil uygulamalar geliştirir; backend entegrasyonları ve AI destekli ürün geliştirme üzerine odaklanır.</p>
-                    <div class="member-links">
-                        <a href="https://www.linkedin.com/in/fethiye-sari/" target="_blank" rel="noopener noreferrer" class="member-link">LinkedIn</a>
-                        <a href="https://github.com/fethiyesari" target="_blank" rel="noopener noreferrer" class="member-link">GitHub</a>
+                    <h2>Fethiye Sarı</h2>
+                    <span class="role badge mono" style="background:var(--green);color:var(--on-color)">Co-Founder &amp; Developer</span>
+                    <p class="bio" data-i18n="team.fethiye.bio">Yazılım mühendisi. Flutter ile çok platformlu mobil uygulamalar geliştirir; backend entegrasyonları ve AI destekli ürün geliştirme üzerine odaklanır.</p>
+                    <div class="links">
+                        <a href="https://www.linkedin.com/in/fethiye-sari/" target="_blank" rel="noopener noreferrer" class="btn btn-white">LinkedIn</a>
+                        <a href="https://github.com/fethiyesari" target="_blank" rel="noopener noreferrer" class="btn btn-white">GitHub</a>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </main>
@@ -212,17 +95,5 @@
             <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
         </div>
     </footer>
-
-    <script>
-        const html = document.documentElement;
-        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
-        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
-        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
-
-
-        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>

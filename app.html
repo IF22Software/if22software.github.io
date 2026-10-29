@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF22 Software</title>
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="site.js" defer></script>
+    <script src="i18n.js" defer></script>
+    <script src="apps-data.js" defer></script>
+    <style>
+        .back {
+            display: inline-block; margin: 32px 0 20px;
+            color: var(--ink); text-decoration: none;
+        }
+        .back:hover { background: var(--yellow); color: var(--on-color); }
+
+        .hero {
+            position: relative;
+            display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+            padding: clamp(24px, 5vw, 48px);
+            color: #111;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background-image: radial-gradient(rgba(17,17,17,0.16) 1.5px, transparent 1.5px);
+            background-size: 18px 18px;
+        }
+        .hero > * { position: relative; }
+        .hero .tile {
+            width: clamp(120px, 18vw, 180px); aspect-ratio: 1;
+            border: 3px solid #111; border-radius: 24%;
+            box-shadow: 7px 7px 0 #111;
+            overflow: hidden; background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 3rem;
+            transform: rotate(-5deg);
+        }
+        .hero .tile img { width: 100%; height: 100%; object-fit: cover; }
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; }
+        .hero .tagline {
+            display: inline-block; margin-top: 12px;
+            font-size: clamp(1.125rem, 2.4vw, 1.5rem); font-weight: 700;
+            background: #fff; border: 3px solid #111; padding: 2px 10px;
+            transform: rotate(-1deg);
+        }
+        .hero .desc { margin-top: 18px; font-size: 1.0625rem; line-height: 1.55; max-width: 620px; }
+        .hero .chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+        .hero .chips .badge { background: #fff; color: #111; border-color: #111; }
+        .hero .chips .badge-live { background: var(--green); }
+        .hero .chips .badge-soon { background: var(--pink); }
+        .actions { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+        .hero .btn { --line: #111; }
+        .hero .btn-store { background: #111; color: #fff; }
+        .hero .btn-store-alt { background: #fff; color: #111; }
+        .soon-note { font-weight: 700; }
+        @media (max-width: 680px) {
+            .hero { grid-template-columns: 1fr; gap: 22px; }
+        }
+
+        .section { margin-top: 64px; }
+        .section h2 {
+            display: inline-block;
+            font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em;
+            margin-bottom: 22px;
+        }
+
+        .shots {
+            display: flex; gap: 22px;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 4px 12px 22px 4px;
+            margin: 0 -4px;
+        }
+        .shots img {
+            flex: 0 0 auto;
+            width: clamp(180px, 24vw, 240px); height: auto;
+            border: 3px solid var(--line);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            scroll-snap-align: start;
+            background: var(--surface);
+        }
+        .shots img:nth-child(odd) { transform: rotate(-1.2deg); }
+        .shots img:nth-child(even) { transform: rotate(1.2deg); }
+
+        .features { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+        .feature { padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; font-weight: 600; line-height: 1.4; }
+        .feature .n {
+            flex: 0 0 auto;
+            width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--line); color: #111;
+        }
+
+        .legal { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        .more { display: flex; flex-wrap: wrap; gap: 18px; padding-bottom: 80px; }
+        .more a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 14px 8px 8px;
+            text-decoration: none; color: var(--ink); font-weight: 700;
+            background: var(--surface); border: 3px solid var(--line); box-shadow: var(--shadow);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .more a:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--line); }
+        .more .mini {
+            width: 40px; height: 40px; border: 2px solid #111; border-radius: 24%;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 800; color: #111;
+        }
+        .more .mini img { width: 100%; height: 100%; object-fit: cover; }
+
+        .notfound { padding: 80px 0; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">IF22 Software</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+                    <li><a href="apps.html" class="active" data-i18n="nav.apps">Uygulamalar</a></li>
+                    <li><a href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap" id="page"></div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
+            <a href="contact.html" data-i18n="nav.contact">İletişim</a>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        'use strict';
+        var page = document.getElementById('page');
+        var i18n = window.if22i18n;
+        var apps = window.IF22_APPS;
+        var id = new URLSearchParams(location.search).get('app');
+        var app = apps.filter(function (a) { return a.id === id; })[0];
+        var legalKey = { privacy: 'apps.privacy', terms: 'apps.terms', deletion: 'apps.deletion' };
+        var featureColors = ['var(--yellow)', 'var(--pink)', 'var(--blue)', 'var(--green)', 'var(--orange)'];
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+        function tile(a, cls) {
+            return '<div class="' + cls + '" style="background:' + a.color + '">' +
+                (a.logo ? '<img src="' + a.logo + '" alt="">' : esc(a.initials)) + '</div>';
+        }
+        function ext(href) { return /^https?:/.test(href) ? ' target="_blank" rel="noopener noreferrer"' : ''; }
+
+        function render() {
+            var t = i18n.t, lang = i18n.lang();
+
+            if (!app) {
+                document.title = 'IF22 Software';
+                page.innerHTML = '<div class="notfound"><a class="back mono" href="apps.html">' + esc(t('app.back')) + '</a>' +
+                    '<div class="page-head"><h1>' + esc(t('app.notfound')) + '</h1></div></div>';
+                return;
+            }
+
+            document.title = app.name + ' | IF22 Software';
+
+            var actions = '';
+            if (app.links.appstore) actions += '<a class="btn btn-store" href="' + app.links.appstore + '" target="_blank" rel="noopener noreferrer">' + esc(t('app.appstore')) + '</a>';
+            if (app.links.play) actions += '<a class="btn btn-store-alt" href="' + app.links.play + '" target="_blank" rel="noopener noreferrer">' + esc(t('app.play')) + '</a>';
+            if (!actions) actions = '<span class="soon-note">' + esc(t('app.soonNote')) + '</span>';
+
+            var chips = (app.status === 'live'
+                    ? '<span class="badge badge-live mono">' + esc(t('apps.live')) + '</span>'
+                    : '<span class="badge badge-soon mono">' + esc(t('apps.soon')) + '</span>') +
+                app.platforms.map(function (p) { return '<span class="badge mono">' + esc(p) + '</span>'; }).join('');
+
+            var html = '<a class="back mono" href="apps.html">' + esc(t('app.back')) + '</a>' +
+                '<section class="hero box" style="background:' + app.color + '">' +
+                    tile(app, 'tile') +
+                    '<div>' +
+                        '<h1>' + esc(app.name) + '</h1>' +
+                        '<p class="tagline">' + esc(app.tagline[lang]) + '</p>' +
+                        '<p class="desc">' + esc(app.desc[lang]) + '</p>' +
+                        '<div class="chips">' + chips + '</div>' +
+                        '<div class="actions">' + actions + '</div>' +
+                    '</div>' +
+                '</section>';
+
+            if (app.screens) {
+                var shots = '';
+                for (var i = 1; i <= app.screens; i++) {
+                    shots += '<img src="screens/' + app.id + '/' + i + '.jpg" alt="' + esc(app.name) + ' ' + i + '" loading="lazy">';
+                }
+                html += '<section class="section"><h2 class="highlight">' + esc(t('app.screens')) + '</h2><div class="shots">' + shots + '</div></section>';
+            }
+
+            var feats = app.features[lang] || [];
+            if (feats.length) {
+                html += '<section class="section"><h2 class="highlight">' + esc(t('app.features')) + '</h2><div class="features">' +
+                    feats.map(function (f, i) {
+                        return '<div class="feature box"><span class="n mono" style="background:' + featureColors[i % featureColors.length] + '">' + (i + 1) + '</span><span>' + esc(f) + '</span></div>';
+                    }).join('') + '</div></section>';
+            }
+
+            html += '<section class="section"><h2 class="highlight">' + esc(t('app.legal')) + '</h2><div class="legal">' +
+                app.legal.map(function (l) {
+                    return '<a class="btn btn-white" href="' + l.href + '"' + ext(l.href) + '>' + esc(t(l.label || legalKey[l.key])) + '</a>';
+                }).join('') + '</div></section>';
+
+            html += '<section class="section"><h2 class="highlight">' + esc(t('app.more')) + '</h2><div class="more">' +
+                apps.filter(function (a) { return a.id !== app.id; }).map(function (a) {
+                    return '<a href="app.html?app=' + a.id + '">' + tile(a, 'mini') + esc(a.name) + '</a>';
+                }).join('') + '</div></section>';
+
+            page.innerHTML = html;
+        }
+
+        render();
+        document.addEventListener('if22:lang', render);
+    });
+    </script>
+</body>
+</html>

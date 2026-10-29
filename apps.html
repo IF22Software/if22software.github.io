@@ -1,161 +1,65 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uygulamalar | IF22 Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="bg.js" defer></script>
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="site.js" defer></script>
     <script src="i18n.js" defer></script>
+    <script src="apps-data.js" defer></script>
     <style>
-        :root, [data-theme="dark"] {
-            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
-            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
-            --border: rgba(255,255,255,0.1);
-            --shadow-card: 0 2px 20px rgba(0,0,0,0.5); --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
-            --aurora-a: rgba(41,151,255,0.13); --aurora-b: rgba(94,92,230,0.08); --aurora-c: rgba(0,210,255,0.06);
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            padding-bottom: 80px;
         }
-        [data-theme="light"] {
-            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
-            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
-            --border: rgba(0,0,0,0.08);
-            --shadow-card: 0 2px 16px rgba(0,0,0,0.06); --shadow-hover: 0 10px 32px rgba(0,0,0,0.10);
-            --aurora-a: rgba(0,113,227,0.07); --aurora-b: rgba(94,92,230,0.04); --aurora-c: rgba(0,180,255,0.04);
+        .app-card {
+            display: flex; flex-direction: column;
+            text-decoration: none; color: var(--ink);
+            transition: transform 0.12s, box-shadow 0.12s;
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg); color: var(--text-primary);
-            min-height: 100vh; display: flex; flex-direction: column;
-            transition: background 0.35s ease, color 0.35s ease; overflow-x: hidden;
-        }
-        ::selection { background: var(--accent); color: #fff; }
-
-        #mouseAurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; will-change: background; }
-
-        .site-header {
-            position: sticky; top: 0; z-index: 50; width: 100%;
-            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            transition: background 0.35s ease, border-color 0.35s ease;
-        }
-        .nav-inner {
-            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
-            height: 52px; display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
-        .logo:hover { opacity: 0.6; }
-        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
-        @media (max-width: 767px) { .nav-links { display: none; } }
-        .nav-controls { display: flex; align-items: center; gap: 4px; }
-        .theme-toggle, .lang-toggle {
-            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
-            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
-        }
-        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
-        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
-
-        .page-header {
-            position: relative; z-index: 1;
-            max-width: 1080px; margin: 0 auto; padding: 80px max(24px, 5vw) 56px; width: 100%;
-        }
-        .page-title {
-            font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.04em;
-            color: var(--text-primary); margin-bottom: 12px;
-            opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.1s both;
-        }
-        .page-sub {
-            font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.6; max-width: 480px;
-            opacity: 0; animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.25s both;
-        }
-
-        main { flex-grow: 1; }
-
-        .section { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw) 80px; width: 100%; }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px;
-            padding: 28px; display: flex; flex-direction: column;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
-        }
-        .card:hover { transform: translateY(-6px) scale(1.01); box-shadow: var(--shadow-hover); }
-
-        .card-icon {
-            width: 64px; height: 64px; background: var(--bg);
-            border: 1px solid var(--border); border-radius: 16px;
+        .app-card:hover { transform: translate(-3px,-3px); box-shadow: 10px 10px 0 var(--line); }
+        .app-card:active { transform: translate(4px,4px); box-shadow: 2px 2px 0 var(--line); }
+        .app-card .top {
+            position: relative;
+            height: 150px;
+            border-bottom: 3px solid var(--line);
             display: flex; align-items: center; justify-content: center;
-            font-size: 30px; margin-bottom: 20px; flex-shrink: 0; overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
         }
-        .card:hover .card-icon { transform: scale(1.08) rotate(3deg); }
-
-        .app-logo-img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
+        .app-card .top::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(17,17,17,0.18) 1.5px, transparent 1.5px);
+            background-size: 16px 16px;
         }
-        .app-logo-fallback {
-            width: 100%; height: 100%; display: none; align-items: center; justify-content: center;
-            font-size: 0.95rem; font-weight: 700; letter-spacing: -0.04em; color: var(--text-primary);
-            background: linear-gradient(135deg, rgba(41,151,255,0.14), rgba(255,255,255,0.02));
+        .tile {
+            position: relative;
+            width: 92px; height: 92px;
+            border: 3px solid #111;
+            border-radius: 24%;
+            box-shadow: 4px 4px 0 #111;
+            overflow: hidden;
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.75rem; color: #111;
+            transform: rotate(-4deg);
+            transition: transform 0.2s;
         }
-
-        .card-title { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 8px; }
-        .card-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; flex-grow: 1; margin-bottom: 24px; }
-        .card-actions { display: flex; flex-direction: column; gap: 8px; }
-        .btn-store {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 10px 18px; border-radius: 980px; background: var(--accent); color: #fff;
-            font-size: 0.875rem; font-weight: 500; text-decoration: none;
-            transition: filter 0.2s, transform 0.18s;
-        }
-        .btn-store:hover { filter: brightness(1.12); transform: scale(0.98); }
-        .card-privacy { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; text-align: center; transition: color 0.2s; }
-        .card-privacy:hover { color: var(--accent); }
-
-        .badge-soon {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 0.8125rem; font-weight: 500;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            border-radius: 980px;
-            padding: 6px 14px;
-            width: fit-content;
-        }
-        .badge-soon::before {
-            content: '';
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--text-secondary);
-            opacity: 0.5;
-        }
-        .card-soon { opacity: 0.6; }
-
-        .reveal {
-            opacity: 0; transform: scale(0.96) translateY(18px);
-            transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-        }
-        .reveal.visible { opacity: 1; transform: scale(1) translateY(0); }
-        .reveal-d1 { transition-delay: 0.1s; }
-        .reveal-d2 { transition-delay: 0.2s; }
-        .reveal-d3 { transition-delay: 0.3s; }
-
-        footer { position: relative; z-index: 1; margin-top: auto; }
-        .footer-inner {
-            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
-            border-top: 1px solid var(--border); display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 10px;
-        }
-        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
-        .footer-inner a:hover { color: var(--text-primary); }
-
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        .tile img { width: 100%; height: 100%; object-fit: cover; }
+        .app-card:hover .tile { transform: rotate(3deg) scale(1.06); }
+        .app-card .top .badge { position: absolute; top: 12px; right: 12px; }
+        .app-card .body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .app-card h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
+        .app-card p { margin-top: 6px; color: var(--muted); line-height: 1.45; flex-grow: 1; }
+        .app-card .meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .app-card .platforms { color: var(--muted); font-size: 0.6875rem; }
+        .app-card .go { font-weight: 800; }
     </style>
 </head>
 <body>
@@ -172,151 +76,63 @@
                 </ul>
             </nav>
             <div class="nav-controls">
-            <button class="lang-toggle" id="langToggle">EN</button>
-            <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
-                <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="page-header">
-            <h1 class="page-title" data-i18n="apps.title">Uygulamalar</h1>
-            <p class="page-sub" data-i18n="apps.sub">Yapay zeka ile güçlendirilmiş mobil uygulamalarımız.</p>
-        </div>
-        <div class="section">
-            <div class="cards-grid">
-                <div class="card reveal reveal-d1">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/dreamoracle.png" alt="Dream Oracle logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">DO</span>
-                    </div>
-                    <p class="card-title">Dream Oracle</p>
-                    <p class="card-desc" data-i18n="apps.dreamoracle.desc">Google Gemini AI gücüyle rüyalarınızın psikolojik ve mistik analizini saniyeler içinde öğrenin. App Store'da yayında!</p>
-                    <div class="card-actions">
-                        <a href="https://apps.apple.com/app/id6759988615" target="_blank" class="btn-store" data-i18n="apps.dreamoracle.store">App Store'da İncele</a>
-                        <a href="https://docs.google.com/document/u/2/d/e/2PACX-1vSI9sQMsHO62MEwDjXHwFXK-LKktwKJ1ZGJ9RWYuU6cbdVOMV4fRl_Cix9upjBhRHihJ8L7-PS8oJds/pub" target="_blank" rel="noopener noreferrer" class="card-privacy" data-i18n="apps.dreamoracle.privacy">Gizlilik Politikası</a>
-                    </div>
-                </div>
-                <div class="card reveal reveal-d2">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/pomoquest.png" alt="PomoQuest logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">PQ</span>
-                    </div>
-                    <p class="card-title">PomoQuest</p>
-                    <p class="card-desc" data-i18n="apps.pomoquest.desc">Pomodoro tekniğini oyunlaştırılmış bir deneyimle birleştiren odaklanma uygulaması. XP kazan, seviye atla, pixel art avatarını özelleştir.</p>
-                    <div class="card-actions">
-                        <a href="https://apps.apple.com/app/pomoquest" target="_blank" class="btn-store" data-i18n="apps.pomoquest.store">App Store'da İncele</a>
-                        <a href="pomoquest_privacy_policy.html" class="card-privacy" data-i18n="apps.pomoquest.privacy">Gizlilik Politikası</a>
-                    </div>
-                </div>
-                <div class="card card-soon reveal reveal-d3">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/giftie.png" alt="Giftie logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">GI</span>
-                    </div>
-                    <p class="card-title">Giftie</p>
-                    <p class="card-desc" data-i18n="apps.giftie.desc">Sevdikleriniz için mükemmel hediyeyi bulmak artık çok kolay. Yapay zeka destekli kişiselleştirilmiş hediye önerileri.</p>
-                    <div class="card-actions">
-                        <span class="badge-soon" data-i18n="apps.soon">Yakında</span>
-                        <a href="giftie_privacy_policy.html" class="card-privacy" data-i18n="apps.giftie.privacy">Gizlilik Politikası</a>
-                    </div>
-                </div>
-                <div class="card card-soon reveal reveal-d3">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/checkmybite.png" alt="CheckMyBite logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">CB</span>
-                    </div>
-                    <p class="card-title" lang="en">CheckMyBite</p>
-                    <p class="card-desc" data-i18n="apps.checkmybite.desc">Fotoğraf çek, yapay zeka analiz etsin. Ürünlerin içerikleri, alerjenler ve besin değerleri hakkında anında bilgi al. Özel beslenme tercihleri veya hassasiyetleri olanlar için tasarlandı.</p>
-                    <div class="card-actions">
-                        <span class="badge-soon" data-i18n="apps.soon">Yakında</span>
-                        <a href="checkmybite_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
-                        <a href="checkmybite_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
-                    </div>
-                </div>
-                <div class="card reveal reveal-d3">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/spendwise.png" alt="SpendWise logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">SW</span>
-                    </div>
-                    <p class="card-title">SpendWise</p>
-                    <p class="card-desc" data-i18n="apps.spendwise.desc">Faturalarını ve dijital aboneliklerini tek yerden takip et. Son ödeme tarihlerinde bildirim al, aylık harcama grafiklerini gör. Türkiye pazarına özel TL bazlı fatura ve abonelik yöneticisi.</p>
-                    <div class="card-actions">
-                        <a href="https://apps.apple.com/us/app/spendwise-harcama-takibi/id6767567712" target="_blank" class="btn-store" data-i18n="apps.spendwise.store">App Store'da İncele</a>
-                        <a href="spendwise_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
-                        <a href="spendwise_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
-                    </div>
-                </div>
-                <div class="card card-soon reveal reveal-d1">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/netsayacim.png" alt="Net Sayacım logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">NS</span>
-                    </div>
-                    <p class="card-title" lang="tr">Net Sayacım</p>
-                    <p class="card-desc" data-i18n="apps.netsayacim.desc">ÖSYM sınavlarına (YKS, KPSS, ALES, TUS, YDS) hazırlananlar için sınav takip uygulaması. Hedef net belirle, konu ilerlemeni ve deneme sonuçlarını takip et, çözemediğin soruların fotoğrafını çekip klasörle, geçmiş yıllara dayalı tahmini sıralamanı gör.</p>
-                    <div class="card-actions">
-                        <a href="https://play.google.com/store/apps/details?id=com.if22software.net_sayacim&pcampaignid=web_share" target="_blank" class="btn-store" data-i18n="apps.netsayacim.play">Google Play'de İncele</a>
-                        <a href="https://apps.apple.com/tr/app/net-sayac%C4%B1m-s%C4%B1nav-takibi/id6783307079?l=tr" target="_blank" class="btn-store" data-i18n="apps.netsayacim.appstore">App Store'da İncele</a>
-                        <a href="netsayacim_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
-                        <a href="netsayacim_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
-                    </div>
-                </div>
-                <div class="card card-soon reveal reveal-d1">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/hibi.png" alt="Hibi logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">日々</span>
-                    </div>
-                    <p class="card-title">Hibi 日々</p>
-                    <p class="card-desc" data-i18n="apps.hibi.desc">Gerçek sayfalar çeviriyormuş hissi veren dijital ajanda. Günlük planlarını, hedeflerini, notlarını ve anılarını kalemle yazıp çizebildiğin, kapağından kâğıdına kadar kişiselleştirebildiğin bir ajandada topla.</p>
-                    <div class="card-actions">
-                        <span class="badge-soon" data-i18n="apps.soon">Yakında</span>
-                        <a href="hibi_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
-                        <a href="hibi_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
-                        <a href="hibi_data_deletion.html" class="card-privacy" data-i18n="apps.deletion">Hesap Silme</a>
-                    </div>
-                </div>
-                <div class="card card-soon reveal reveal-d2">
-                    <div class="card-icon" aria-hidden="true">
-                        <img src="logos/pawfecttime.png" alt="Pawfect Time logo" class="app-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                        <span class="app-logo-fallback">PT</span>
-                    </div>
-                    <p class="card-title" lang="en">Pawfect Time</p>
-                    <p class="card-desc" data-i18n="apps.pawfecttime.desc">Evcil hayvanlarının bakımını tek yerde topla. Mama, kum ve bakım görevleri, ilaç dozları, aşılar, kilo takibi ve günlük; zamanında hatırlatmalar. Ailenle paylaş, widget, Apple Watch ve Siri ile takip et. Verilerin yalnızca cihazında ve kendi iCloud'unda.</p>
-                    <div class="card-actions">
-                        <span class="badge-soon" data-i18n="apps.soon">Yakında</span>
-                        <a href="pawfecttime_privacy_policy.html" class="card-privacy" data-i18n="apps.privacy">Gizlilik Politikası</a>
-                        <a href="pawfecttime_terms.html" class="card-privacy" data-i18n="apps.terms">Şartlar ve Koşullar</a>
-                        <a href="pawfecttime_data_deletion.html" class="card-privacy" data-i18n="apps.dataDeletion">Veri Silme</a>
-                    </div>
-                </div>
+        <div class="wrap">
+            <div class="page-head">
+                <h1><span class="highlight" data-i18n="apps.title">Uygulamalar</span></h1>
+                <p data-i18n="apps.sub">Şimdiye kadar yaptıklarımız. Birine tıkla, yakından bak.</p>
             </div>
+            <div class="grid" id="grid"></div>
         </div>
     </main>
 
     <footer>
         <div class="footer-inner">
             <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
-            <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
+            <a href="contact.html" data-i18n="nav.contact">İletişim</a>
         </div>
     </footer>
 
     <script>
-        const html = document.documentElement;
-        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
-        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
-        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+    document.addEventListener('DOMContentLoaded', function () {
+        'use strict';
+        var grid = document.getElementById('grid');
+        var i18n = window.if22i18n;
 
+        function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        function render() {
+            var lang = i18n.lang();
+            grid.innerHTML = window.IF22_APPS.map(function (a) {
+                var tile = a.logo
+                    ? '<div class="tile"><img src="' + a.logo + '" alt=""></div>'
+                    : '<div class="tile">' + esc(a.initials) + '</div>';
+                var badge = a.status === 'live'
+                    ? '<span class="badge badge-live mono">' + esc(i18n.t('apps.live')) + '</span>'
+                    : '<span class="badge badge-soon mono">' + esc(i18n.t('apps.soon')) + '</span>';
+                return '<a class="app-card box" href="app.html?app=' + a.id + '">' +
+                    '<div class="top" style="background:' + a.color + '">' + tile + badge + '</div>' +
+                    '<div class="body">' +
+                        '<h2>' + esc(a.name) + '</h2>' +
+                        '<p>' + esc(a.tagline[lang]) + '</p>' +
+                        '<div class="meta"><span class="platforms mono">' + esc(a.platforms.join(' · ')) + '</span>' +
+                        '<span class="go">' + esc(i18n.t('apps.view')) + '</span></div>' +
+                    '</div></a>';
+            }).join('');
+        }
+
+        render();
+        document.addEventListener('if22:lang', render);
+    });
     </script>
 </body>
 </html>

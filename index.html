@@ -1,192 +1,85 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IF22 Software | Ana Sayfa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="bg.js" defer></script>
+    <title>IF22 Software</title>
+    <meta name="description" content="IF22 Software — iki kişilik bağımsız bir mobil uygulama stüdyosu. Hibi, Net Sayacım, PomoQuest, SpendWise, Dream Oracle.">
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="site.js" defer></script>
     <script src="i18n.js" defer></script>
+    <script src="apps-data.js" defer></script>
     <style>
-        :root, [data-theme="dark"] {
-            --bg: #000000;
-            --bg-card: #1D1D1F;
-            --bg-nav: rgba(0,0,0,0.82);
-            --text-primary: #F5F5F7;
-            --text-secondary: #86868B;
-            --accent: #2997FF;
-            --accent-rgb: 41,151,255;
-            --border: rgba(255,255,255,0.1);
-            --shadow-card: 0 2px 20px rgba(0,0,0,0.5);
-            --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
-            --aurora-a: rgba(41,151,255,0.13);
-            --aurora-b: rgba(94,92,230,0.08);
-            --aurora-c: rgba(0,210,255,0.06);
-        }
-        [data-theme="light"] {
-            --bg: #F5F5F7;
-            --bg-card: #FFFFFF;
-            --bg-nav: rgba(245,245,247,0.88);
-            --text-primary: #1D1D1F;
-            --text-secondary: #6E6E73;
-            --accent: #0071E3;
-            --accent-rgb: 0,113,227;
-            --border: rgba(0,0,0,0.08);
-            --shadow-card: 0 2px 16px rgba(0,0,0,0.06);
-            --shadow-hover: 0 10px 32px rgba(0,0,0,0.10);
-            --aurora-a: rgba(0,113,227,0.07);
-            --aurora-b: rgba(94,92,230,0.04);
-            --aurora-c: rgba(0,180,255,0.04);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            transition: background 0.35s ease, color 0.35s ease;
-            overflow-x: hidden;
-        }
-        ::selection { background: var(--accent); color: #fff; }
-
-        /* ── Mouse aurora ── */
-        #mouseAurora {
-            position: fixed; inset: 0; z-index: 0;
-            pointer-events: none;
-            will-change: background;
-        }
-
-        /* ── Header ── */
-        .site-header {
-            position: sticky; top: 0; z-index: 50; width: 100%;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: var(--bg-nav);
-            border-bottom: 1px solid var(--border);
-            transition: background 0.35s ease, border-color 0.35s ease;
-        }
-        .nav-inner {
-            max-width: 1080px; margin: 0 auto;
-            padding: 0 max(24px, 5vw);
-            height: 52px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo {
-            font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em;
-            color: var(--text-primary); text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .logo:hover { opacity: 0.6; }
-        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-        .nav-links a {
-            font-size: 0.8125rem; font-weight: 400;
-            color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
-        @media (max-width: 767px) { .nav-links { display: none; } }
-
-        .nav-controls { display: flex; align-items: center; gap: 4px; }
-        .theme-toggle, .lang-toggle {
-            width: 30px; height: 30px; border: none; background: transparent;
-            cursor: pointer; color: var(--text-secondary);
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
-        }
-        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
-        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
-
-        /* ── Hero ── */
-        .hero {
-            position: relative; z-index: 1;
+        .play {
+            position: relative;
             flex-grow: 1;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            text-align: center;
-            padding: 120px max(24px, 5vw) 100px;
-            max-width: 860px; margin: 0 auto; width: 100%;
-        }
-        .hero-eyebrow {
-            font-size: 0.8125rem; font-weight: 500;
-            color: var(--accent); letter-spacing: 0.01em; margin-bottom: 24px;
-            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
-        }
-        .hero-title {
-            font-size: clamp(2.75rem, 7.5vw, 6rem);
-            font-weight: 700; letter-spacing: -0.04em; line-height: 1.04;
-            color: var(--text-primary); margin-bottom: 26px;
-        }
-        .hero-sub {
-            font-size: clamp(1rem, 2.2vw, 1.25rem);
-            color: var(--text-secondary); line-height: 1.65;
-            max-width: 540px; margin-bottom: 44px;
-            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.55s both;
-        }
-        .hero-actions {
-            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.7s both;
+            min-height: 440px;
+            overflow: hidden;
+            background-image: radial-gradient(var(--dot) 1.5px, transparent 1.5px);
+            background-size: 22px 22px;
         }
 
-        /* ── Word reveal ── */
-        .word {
-            display: inline-block;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        .floater {
+            position: absolute; left: 0; top: 0;
+            display: block;
+            border: 3px solid var(--line);
+            border-radius: 24%;
+            box-shadow: 5px 5px 0 var(--line);
+            touch-action: none;
+            user-select: none; -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: grab;
+            will-change: transform;
+            z-index: 2;
         }
-        .word.visible { opacity: 1; transform: translateY(0); }
+        .floater img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: calc(24% - 2px);
+            pointer-events: none;
+        }
+        .floater.held { cursor: grabbing; z-index: 4; box-shadow: 10px 10px 0 var(--line); }
+        .floater .tag {
+            position: absolute; left: 50%; top: calc(100% + 12px);
+            transform: translateX(-50%);
+            white-space: nowrap;
+            padding: 4px 9px;
+            background: var(--ink); color: var(--bg);
+            border: 2px solid var(--line);
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.12s;
+        }
+        .floater:hover .tag, .floater:focus-visible .tag, .floater.held .tag { opacity: 1; }
 
-        /* ── Buttons ── */
-        .btn-primary {
-            display: inline-flex; align-items: center;
-            padding: 12px 24px; border-radius: 980px;
-            background: var(--accent); color: #fff;
-            font-size: 0.9375rem; font-weight: 400;
-            text-decoration: none;
-            transition: filter 0.2s, transform 0.18s;
+        .corner {
+            position: absolute; z-index: 3;
+            pointer-events: none;
         }
-        .btn-primary:hover { filter: brightness(1.12); transform: scale(0.98); }
-        .btn-secondary {
-            display: inline-flex; align-items: center;
-            padding: 12px 24px; border-radius: 980px;
-            background: transparent; color: var(--accent);
-            font-size: 0.9375rem; font-weight: 400;
-            text-decoration: none; transition: background 0.2s;
+        .corner-bl {
+            left: 20px; bottom: 20px;
+            padding: 14px 18px;
+            max-width: 340px;
+            background: var(--surface);
+            border: 3px solid var(--line);
+            box-shadow: var(--shadow);
         }
-        .btn-secondary:hover { background: var(--border); }
-
-        /* ── Scroll reveal ── */
-        .reveal {
-            opacity: 0; transform: scale(0.96) translateY(18px);
-            transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+        .corner-bl strong { display: block; font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em; }
+        .corner-bl span { display: block; margin-top: 2px; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+        .corner-br {
+            right: 20px; bottom: 20px;
+            padding: 6px 10px;
+            background: var(--yellow); color: var(--on-color);
+            border: 2px solid var(--line);
+            transform: rotate(2deg);
         }
-        .reveal.visible { opacity: 1; transform: scale(1) translateY(0); }
-        .reveal-d1 { transition-delay: 0.1s; }
-        .reveal-d2 { transition-delay: 0.2s; }
-        .reveal-d3 { transition-delay: 0.3s; }
-
-        /* ── Footer ── */
-        footer { position: relative; z-index: 1; margin-top: auto; }
-        .footer-inner {
-            max-width: 1080px; margin: 0 auto;
-            padding: 28px max(24px, 5vw);
-            border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 10px;
-        }
-        .footer-inner p, .footer-inner a {
-            font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none;
-        }
-        .footer-inner a:hover { color: var(--text-primary); }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-            .word { opacity: 1 !important; transform: none !important; }
+        @media (max-width: 640px) {
+            .corner-bl { left: 12px; right: 12px; bottom: 12px; max-width: none; padding: 10px 14px; }
+            .corner-bl strong { font-size: 1.125rem; }
+            .corner-br { right: 12px; bottom: auto; top: 12px; }
         }
     </style>
 </head>
@@ -204,34 +97,21 @@
                 </ul>
             </nav>
             <div class="nav-controls">
-            <button class="lang-toggle" id="langToggle">EN</button>
-            <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
-                <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
             </div>
         </div>
     </header>
 
-    <main style="position:relative;z-index:1;display:flex;flex-direction:column;flex-grow:1;">
-        <div class="hero">
-            <p class="hero-eyebrow" data-i18n="index.eyebrow">Modern Uygulamalar</p>
-            <h1 class="hero-title">
-                <span class="word" data-i18n="index.word1">Hayallerinizi</span>&nbsp;<span class="word" data-i18n="index.word2">Koda</span><br>
-                <span class="word" data-i18n="index.word3">Dönüştürüyoruz</span>
-            </h1>
-            <p class="hero-sub" data-i18n="index.sub">
-                Modern ve kullanıcı odaklı mobil deneyimler geliştiren bağımsız bir yazılım stüdyosu.
-            </p>
-            <div class="hero-actions">
-                <a href="apps.html" class="btn-primary" data-i18n="index.btn.apps">Projelerimizi Keşfet</a>
-                <a href="contact.html" class="btn-secondary" data-i18n="index.btn.contact">İletişime Geç →</a>
-            </div>
+    <main class="play" id="play">
+        <div class="corner corner-bl">
+            <strong>IF22 Software</strong>
+            <span data-i18n="index.about">İki kişilik bağımsız bir mobil uygulama stüdyosu.</span>
         </div>
+        <p class="corner corner-br mono" id="hint" data-i18n="index.hint">Logoları tut, fırlat ya da birine tıkla.</p>
     </main>
 
     <footer>
@@ -242,34 +122,213 @@
     </footer>
 
     <script>
-        // ── Theme ──
-        const html = document.documentElement;
-        const iconSun  = document.getElementById('iconSun');
-        const iconMoon = document.getElementById('iconMoon');
+    document.addEventListener('DOMContentLoaded', function () {
+        'use strict';
 
-        function applyTheme(t) {
-            html.setAttribute('data-theme', t);
-            localStorage.setItem('if22-theme', t);
-            iconSun.style.display  = t === 'dark'  ? 'block' : 'none';
-            iconMoon.style.display = t === 'light' ? 'block' : 'none';
+        var play = document.getElementById('play');
+        var caption = document.querySelector('.corner-bl');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var touch = window.matchMedia('(pointer: coarse)').matches;
+        var apps = window.IF22_APPS.filter(function (a) { return a.logo; });
+        var W = 0, H = 0, size = 160;
+        var L = 0, T = 0, R = 0, B = 0;   // the arena the logos bounce around in
+        var bodies = [];
+        var RESTITUTION = 0.5;
+
+        if (touch) {
+            var hint = document.getElementById('hint');
+            hint.setAttribute('data-i18n', 'index.hint.touch');
+            hint.textContent = window.if22i18n.t('index.hint.touch');
         }
-        const saved = localStorage.getItem('if22-theme');
-        const sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        applyTheme(saved || sys);
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+
+        // Logos are big and share a compact arena in the middle, so they stay close together.
+        function measure() {
+            W = play.clientWidth; H = play.clientHeight;
+            var reserve = W < 640 ? caption.offsetHeight + 24 : 0;
+            var usableH = H - reserve;
+            size = Math.round(Math.max(84, Math.min(140, Math.min(W, usableH) * 0.2)));
+            var aw = Math.min(W - 32, size * 4.6);
+            var ah = Math.min(usableH - 32, size * 3.3);
+            L = (W - aw) / 2; R = L + aw;
+            T = (usableH - ah) / 2; B = T + ah;
+        }
+        measure();
+
+        function rand(a, b) { return a + Math.random() * (b - a); }
+
+        apps.forEach(function (app) {
+            var el = document.createElement('a');
+            el.className = 'floater';
+            el.href = 'app.html?app=' + app.id;
+            el.style.background = app.color;
+            el.setAttribute('aria-label', app.name);
+            el.draggable = false;
+            el.innerHTML = '<img src="' + app.logo + '" alt="" draggable="false"><span class="tag mono"></span>';
+            el.querySelector('.tag').textContent = app.name;
+            play.appendChild(el);
+
+            var speed = reduced ? 0 : rand(45, 75);
+            var dir = rand(0, Math.PI * 2);
+            bodies.push({
+                el: el, x: 0, y: 0,
+                vx: Math.cos(dir) * speed, vy: Math.sin(dir) * speed,
+                cruise: speed,
+                rot: rand(-8, 8), vr: reduced ? 0 : rand(-10, 10),
+                held: false, hover: false, dragged: false
+            });
         });
 
-        // ── Word reveal ──
-        document.querySelectorAll('.word').forEach((w, i) => {
-            setTimeout(() => w.classList.add('visible'), 260 + i * 120);
+        function applySize() {
+            bodies.forEach(function (b) {
+                b.r = size / 2;
+                b.el.style.width = b.el.style.height = size + 'px';
+            });
+        }
+        applySize();
+
+        // Scatter inside the arena, avoiding overlaps where there is room.
+        bodies.forEach(function (b, i) {
+            for (var tries = 0; tries < 300; tries++) {
+                b.x = rand(L + b.r, Math.max(L + b.r, R - b.r));
+                b.y = rand(T + b.r, Math.max(T + b.r, B - b.r));
+                var ok = true;
+                for (var j = 0; j < i; j++) {
+                    var o = bodies[j];
+                    if (Math.hypot(o.x - b.x, o.y - b.y) < b.r + o.r + 8) { ok = false; break; }
+                }
+                if (ok) break;
+            }
         });
 
-        // ── Scroll reveal ──
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        function render(b) {
+            b.el.style.transform = 'translate(' + (b.x - b.r) + 'px,' + (b.y - b.r) + 'px) rotate(' + b.rot + 'deg)';
+        }
+
+        function invMass(b) { return (b.held || b.hover) ? 0 : 1; }
+
+        function step(dt) {
+            bodies.forEach(function (b) {
+                if (b.held || b.hover) return;
+                b.x += b.vx * dt;
+                b.y += b.vy * dt;
+                b.rot += b.vr * dt;
+                if (b.rot > 10 || b.rot < -10) { b.rot = Math.max(-10, Math.min(10, b.rot)); b.vr = -b.vr; }
+
+                // ease thrown logos back to their cruising speed
+                var sp = Math.hypot(b.vx, b.vy);
+                if (sp > 0.01) {
+                    var target = sp + (b.cruise - sp) * Math.min(1, dt * 3);
+                    b.vx *= target / sp; b.vy *= target / sp;
+                }
+
+                // Arena walls only turn a logo around, so one thrown outside drifts back in.
+                if (b.x < L + b.r) b.vx = Math.abs(b.vx);
+                if (b.x > R - b.r) b.vx = -Math.abs(b.vx);
+                if (b.y < T + b.r) b.vy = Math.abs(b.vy);
+                if (b.y > B - b.r) b.vy = -Math.abs(b.vy);
+                b.x = Math.max(b.r, Math.min(W - b.r, b.x));
+                b.y = Math.max(b.r, Math.min(H - b.r, b.y));
+            });
+
+            for (var i = 0; i < bodies.length; i++) {
+                for (var j = i + 1; j < bodies.length; j++) {
+                    var a = bodies[i], c = bodies[j];
+                    var dx = c.x - a.x, dy = c.y - a.y;
+                    var d = Math.hypot(dx, dy), min = a.r + c.r;
+                    if (d >= min || d === 0) continue;
+                    var ia = invMass(a), ic = invMass(c);
+                    if (ia + ic === 0) continue;
+                    var nx = dx / d, ny = dy / d;
+                    var push = (min - d) / (ia + ic);
+                    a.x -= nx * push * ia; a.y -= ny * push * ia;
+                    c.x += nx * push * ic; c.y += ny * push * ic;
+                    var rel = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+                    if (rel < 0) {
+                        // restitution < 1 so a thrown logo loses energy instead of pinballing
+                        var imp = -(1 + RESTITUTION) * rel / (ia + ic);
+                        a.vx -= imp * ia * nx; a.vy -= imp * ia * ny;
+                        c.vx += imp * ic * nx; c.vy += imp * ic * ny;
+                        if (!reduced) { a.vr = rand(-14, 14); c.vr = rand(-14, 14); }
+                    }
+                }
+            }
+            bodies.forEach(render);
+        }
+
+        var last = performance.now();
+        function tick(now) {
+            var dt = Math.min(0.033, (now - last) / 1000);
+            last = now;
+            step(dt);
+            requestAnimationFrame(tick);
+        }
+        bodies.forEach(render);
+        requestAnimationFrame(tick);
+
+        // ── Grab, throw, click ──
+        bodies.forEach(function (b) {
+            var el = b.el, ox = 0, oy = 0, sx = 0, sy = 0, samples = [];
+
+            el.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') b.hover = true; });
+            el.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') b.hover = false; });
+
+            el.addEventListener('pointerdown', function (e) {
+                if (e.button !== 0) return;
+                var rect = play.getBoundingClientRect();
+                b.held = true; b.dragged = false;
+                el.classList.add('held');
+                el.setPointerCapture(e.pointerId);
+                ox = e.clientX - rect.left - b.x;
+                oy = e.clientY - rect.top - b.y;
+                sx = e.clientX; sy = e.clientY;
+                samples = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
+            });
+
+            el.addEventListener('pointermove', function (e) {
+                if (!b.held) return;
+                if (Math.hypot(e.clientX - sx, e.clientY - sy) > 6) b.dragged = true;
+                var rect = play.getBoundingClientRect();
+                b.x = Math.max(b.r, Math.min(W - b.r, e.clientX - rect.left - ox));
+                b.y = Math.max(b.r, Math.min(H - b.r, e.clientY - rect.top - oy));
+                samples.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+                if (samples.length > 6) samples.shift();
+                render(b);
+            });
+
+            function release() {
+                if (!b.held) return;
+                b.held = false;
+                el.classList.remove('held');
+                if (b.dragged && samples.length > 1) {
+                    var s0 = samples[0], s1 = samples[samples.length - 1];
+                    var t = Math.max(0.016, (s1.t - s0.t) / 1000);
+                    var vx = (s1.x - s0.x) / t, vy = (s1.y - s0.y) / t;
+                    var sp = Math.hypot(vx, vy), max = 650;
+                    if (sp > max) { vx *= max / sp; vy *= max / sp; }
+                    if (sp < 20) { var a = rand(0, Math.PI * 2); vx = Math.cos(a) * b.cruise; vy = Math.sin(a) * b.cruise; }
+                    b.vx = reduced ? 0 : vx; b.vy = reduced ? 0 : vy;
+                    b.hover = false;
+                }
+            }
+            el.addEventListener('pointerup', release);
+            el.addEventListener('pointercancel', release);
+
+            el.addEventListener('click', function (e) {
+                if (b.dragged) { e.preventDefault(); b.dragged = false; }
+            });
+            el.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        });
+
+        window.addEventListener('resize', function () {
+            measure();
+            applySize();
+            bodies.forEach(function (b) {
+                b.x = Math.max(L + b.r, Math.min(R - b.r, b.x));
+                b.y = Math.max(T + b.r, Math.min(B - b.r, b.y));
+                render(b);
+            });
+        });
+    });
     </script>
 </body>
 </html>
