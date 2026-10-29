@@ -29,6 +29,33 @@ window.IF22_APPS = [
         ]
     },
     {
+        id: 'pawfecttime',
+        name: 'Pawfect Time',
+        logo: 'logos/pawfecttime.png',
+        color: '#F7BBAE',
+        status: 'soon',
+        platforms: ['iPhone', 'Apple Watch'],
+        tagline: {
+            tr: 'Evcil dostlarının bakımı, tek yerde.',
+            en: 'All your pets\' care in one place.'
+        },
+        desc: {
+            tr: 'Mama, kum ve bakım görevleri, ilaç dozları, aşılar, kilo takibi ve günlük; zamanında hatırlatmalar. Verilerin yalnızca cihazında ve kendi iCloud\'unda.',
+            en: 'Feeding, litter and grooming tasks, medication doses, vaccinations, weight tracking and a diary, with timely reminders. Your data stays on your device and in your own iCloud.'
+        },
+        features: {
+            tr: ['Mama, kum ve bakım görevleri', 'İlaç dozları ve aşı takvimi', 'Kilo takibi ve günlük', 'Zamanında hatırlatmalar', 'Ailenle paylaş', 'Widget, Apple Watch ve Siri'],
+            en: ['Feeding, litter and grooming tasks', 'Medication doses and vaccinations', 'Weight tracking and a diary', 'Timely reminders', 'Share with your family', 'Widgets, Apple Watch and Siri']
+        },
+        links: {},
+        screens: 0,
+        legal: [
+            { key: 'privacy', href: 'pawfecttime_privacy_policy.html' },
+            { key: 'terms', href: 'pawfecttime_terms.html' },
+            { key: 'deletion', href: 'pawfecttime_data_deletion.html', label: 'apps.dataDeletion' }
+        ]
+    },
+    {
         id: 'netsayacim',
         name: 'Net Sayacım',
         logo: 'logos/netsayacim.png',
