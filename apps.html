@@ -24,8 +24,8 @@
             text-decoration: none; color: var(--ink);
             transition: transform 0.12s, box-shadow 0.12s;
         }
-        .app-card:hover { transform: translate(-3px,-3px); box-shadow: 10px 10px 0 var(--line); }
-        .app-card:active { transform: translate(4px,4px); box-shadow: 2px 2px 0 var(--line); }
+        .app-card:hover { transform: translate(-3px,-3px); box-shadow: 10px 10px 0 var(--shadow-c); }
+        .app-card:active { transform: translate(4px,4px); box-shadow: 2px 2px 0 var(--shadow-c); }
         .app-card .top {
             position: relative;
             height: 150px;
@@ -120,7 +120,7 @@
                     ? '<span class="badge badge-live mono">' + esc(i18n.t('apps.live')) + '</span>'
                     : '<span class="badge badge-soon mono">' + esc(i18n.t('apps.soon')) + '</span>';
                 return '<a class="app-card box" href="app.html?app=' + a.id + '">' +
-                    '<div class="top" style="background:' + a.color + '">' + tile + badge + '</div>' +
+                    '<div class="top app-bg" style="--app-color:' + a.color + '">' + tile + badge + '</div>' +
                     '<div class="body">' +
                         '<h2>' + esc(a.name) + '</h2>' +
                         '<p>' + esc(a.tagline[lang]) + '</p>' +
