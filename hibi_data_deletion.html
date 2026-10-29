@@ -4,113 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hesap ve Veri Silme — Hibi | IF22 Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
     <script>document.documentElement.setAttribute('lang', localStorage.getItem('if22-lang') || 'tr');</script>
-    <script src="bg.js" defer></script>
     <script src="i18n.js" defer></script>
-    <style>
-        :root, [data-theme="dark"] {
-            --bg: #000000; --bg-card: #1D1D1F; --bg-nav: rgba(0,0,0,0.82);
-            --text-primary: #F5F5F7; --text-secondary: #86868B; --accent: #2997FF;
-            --border: rgba(255,255,255,0.1);
-        }
-        [data-theme="light"] {
-            --bg: #F5F5F7; --bg-card: #FFFFFF; --bg-nav: rgba(245,245,247,0.88);
-            --text-primary: #1D1D1F; --text-secondary: #6E6E73; --accent: #0071E3;
-            --border: rgba(0,0,0,0.08);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg); color: var(--text-primary);
-            min-height: 100vh; display: flex; flex-direction: column;
-            transition: background 0.35s ease, color 0.35s ease;
-        }
-        ::selection { background: var(--accent); color: #fff; }
-
-        .site-header {
-            position: sticky; top: 0; z-index: 50; width: 100%;
-            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: var(--bg-nav); border-bottom: 1px solid var(--border);
-            transition: background 0.35s ease, border-color 0.35s ease;
-        }
-        .nav-inner {
-            max-width: 1080px; margin: 0 auto; padding: 0 max(24px, 5vw);
-            height: 52px; display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); text-decoration: none; transition: opacity 0.2s; }
-        .logo:hover { opacity: 0.6; }
-        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-        .nav-links a { font-size: 0.8125rem; font-weight: 400; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text-primary); }
-        @media (max-width: 767px) { .nav-links { display: none; } }
-        .nav-controls { display: flex; align-items: center; gap: 4px; }
-        .theme-toggle, .lang-toggle {
-            width: 30px; height: 30px; border: none; background: transparent; cursor: pointer;
-            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: color 0.2s, background 0.2s; padding: 0;
-        }
-        .theme-toggle:hover, .lang-toggle:hover { color: var(--text-primary); background: var(--border); }
-        .lang-toggle { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; }
-
-        main {
-            position: relative; z-index: 1; flex-grow: 1;
-            max-width: 720px; margin: 0 auto;
-            padding: 72px max(24px, 5vw) 80px; width: 100%;
-        }
-
-        .page-title {
-            font-size: clamp(1.875rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.04em;
-            color: var(--text-primary); margin-bottom: 8px;
-            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both;
-        }
-        .page-meta {
-            font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 56px;
-            opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.22s both;
-        }
-
-        .prose { color: var(--text-secondary); line-height: 1.7; font-size: 0.9375rem; }
-        .prose p { margin-bottom: 16px; }
-        .prose p:last-child { margin-bottom: 0; }
-        .prose section { margin-bottom: 40px; }
-        .prose h2 {
-            font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
-            color: var(--text-primary); margin-bottom: 14px;
-            padding-left: 12px; border-left: 2px solid var(--accent);
-        }
-        .prose ul { list-style: none; margin: 12px 0 16px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-        .prose ul li { padding-left: 16px; position: relative; }
-        .prose ul li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
-        .prose strong { color: var(--text-primary); font-weight: 600; }
-        .prose a { color: var(--accent); text-decoration: none; }
-        .prose a:hover { text-decoration: underline; }
-        .prose hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-        .prose .footnote { font-size: 0.8125rem; color: var(--text-secondary); }
-
-        html[lang="en"] .lang-tr { display: none; }
-        html[lang="tr"] .lang-en { display: none; }
-
-        .reveal {
-            opacity: 0; transform: translateY(14px);
-            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        footer { position: relative; z-index: 1; margin-top: auto; }
-        .footer-inner {
-            max-width: 1080px; margin: 0 auto; padding: 28px max(24px, 5vw);
-            border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 10px;
-        }
-        .footer-inner p, .footer-inner a { font-size: 0.8125rem; color: var(--text-secondary); text-decoration: none; }
-        .footer-inner a:hover { color: var(--text-primary); }
-
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
-    </style>
 </head>
 <body>
 

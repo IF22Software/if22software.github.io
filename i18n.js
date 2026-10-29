@@ -10,16 +10,24 @@
             'footer.rights':  '© 2026 IF22 Software. Tüm hakları saklıdır.',
             'footer.privacy': 'Gizlilik Politikaları',
 
-            'index.eyebrow':  'Modern Uygulamalar',
-            'index.word1':    'Hayallerinizi',
-            'index.word2':    'Koda',
-            'index.word3':    'Dönüştürüyoruz',
-            'index.sub':      'Modern ve kullanıcı odaklı mobil deneyimler geliştiren bağımsız bir yazılım stüdyosu.',
-            'index.btn.apps':    'Projelerimizi Keşfet',
-            'index.btn.contact': 'İletişime Geç →',
+            'index.hint':  'Logoları tut, fırlat ya da birine tıkla.',
+            'index.hint.touch': 'Logoları sürükle ya da birine dokun.',
+            'index.about': 'İki kişilik bağımsız bir mobil uygulama stüdyosu.',
 
             'apps.title': 'Uygulamalar',
-            'apps.sub':   'Mobil uygulamalarımız.',
+            'apps.sub':   'Şimdiye kadar yaptıklarımız. Birine tıkla, yakından bak.',
+            'apps.live':  'Yayında',
+            'apps.view':  'İncele →',
+
+            'app.appstore': "App Store'dan indir",
+            'app.play':     "Google Play'den indir",
+            'app.soonNote': 'Çok yakında mağazalarda.',
+            'app.features': 'Neler var?',
+            'app.screens':  'Ekranlar',
+            'app.legal':    'Belgeler',
+            'app.back':     '← Tüm uygulamalar',
+            'app.more':     'Diğer uygulamalarımız',
+            'app.notfound': 'Bu uygulamayı bulamadık.',
             'apps.dreamoracle.desc':  'Google Gemini AI gücüyle rüyalarınızın psikolojik ve mistik analizini saniyeler içinde öğrenin. App Store\'da yayında!',
             'apps.dreamoracle.store': 'App Store\'da İncele',
             'apps.dreamoracle.privacy': 'Gizlilik Politikası',
@@ -91,8 +99,8 @@
 
             'team.title':       'Ekibimiz',
             'team.sub':         'IF22 Software\'ın arkasındaki insanlar.',
-            'team.ibrahim.bio': 'Yazılım Mühendisliği son sınıf öğrencisi. Flutter ve iOS ile mobil uygulama geliştirme, AI entegrasyonları ve App Store yayın süreçleri üzerine deneyim sahibidir.',
-            'team.fethiye.bio': 'Yazılım Mühendisliği son sınıf öğrencisi. Flutter ile çok platformlu mobil uygulamalar geliştirir; backend entegrasyonları ve AI destekli ürün geliştirme üzerine odaklanır.',
+            'team.ibrahim.bio': 'Yazılım mühendisi. Flutter ve iOS ile mobil uygulamalar geliştirir; AI entegrasyonları ve App Store yayın süreçleri üzerine deneyimlidir.',
+            'team.fethiye.bio': 'Yazılım mühendisi. Flutter ile çok platformlu mobil uygulamalar geliştirir; backend entegrasyonları ve AI destekli ürün geliştirme üzerine odaklanır.',
 
             'contact.status': 'Mesaj almaya açığız',
             'contact.title':  'Birlikte Çalışalım',
@@ -107,16 +115,24 @@
             'footer.rights':  '© 2026 IF22 Software. All rights reserved.',
             'footer.privacy': 'Privacy Policies',
 
-            'index.eyebrow':  'Modern Applications',
-            'index.word1':    'Turning',
-            'index.word2':    'Your Dreams',
-            'index.word3':    'Into Code',
-            'index.sub':      'An independent software studio building modern, user-centered mobile experiences.',
-            'index.btn.apps':    'Explore Our Projects',
-            'index.btn.contact': 'Get in Touch →',
+            'index.hint':  'Grab the logos, throw them, or click one.',
+            'index.hint.touch': 'Drag the logos or tap one.',
+            'index.about': 'A two-person indie mobile app studio.',
 
             'apps.title': 'Apps',
-            'apps.sub':   'Our AI-powered mobile applications.',
+            'apps.sub':   'Everything we have made so far. Click one for a closer look.',
+            'apps.live':  'Live',
+            'apps.view':  'View →',
+
+            'app.appstore': 'Download on the App Store',
+            'app.play':     'Get it on Google Play',
+            'app.soonNote': 'Coming to the stores very soon.',
+            'app.features': "What's inside",
+            'app.screens':  'Screens',
+            'app.legal':    'Documents',
+            'app.back':     '← All apps',
+            'app.more':     'More of our apps',
+            'app.notfound': "We couldn't find this app.",
             'apps.dreamoracle.desc':  'Learn the psychological and mystical analysis of your dreams in seconds, powered by Google Gemini AI. Available on the App Store!',
             'apps.dreamoracle.store': 'View on App Store',
             'apps.dreamoracle.privacy': 'Privacy Policy',
@@ -188,8 +204,8 @@
 
             'team.title':       'Our Team',
             'team.sub':         'The people behind IF22 Software.',
-            'team.ibrahim.bio': 'Senior-year Software Engineering student. Experienced in Flutter and iOS mobile app development, AI integrations, and App Store publishing processes.',
-            'team.fethiye.bio': 'Senior-year Software Engineering student. Focuses on cross-platform mobile app development with Flutter, backend integrations, and AI-powered product development.',
+            'team.ibrahim.bio': 'Software engineer. Builds mobile apps with Flutter and iOS, with experience in AI integrations and App Store publishing.',
+            'team.fethiye.bio': 'Software engineer. Builds cross-platform mobile apps with Flutter, focusing on backend integrations and AI-powered products.',
 
             'contact.status': 'Open to messages',
             'contact.title':  "Let's Work Together",
@@ -215,9 +231,14 @@
 
         var btn = document.getElementById('langToggle');
         if (btn) btn.textContent = lang === 'tr' ? 'EN' : 'TR';
+
+        document.dispatchEvent(new CustomEvent('if22:lang', { detail: lang }));
     }
 
-    window.if22i18n = { applyLang: applyLang };
+    function lang() { return localStorage.getItem('if22-lang') || 'tr'; }
+    function tr(key) { return (t[lang()] || t.tr)[key] || key; }
+
+    window.if22i18n = { applyLang: applyLang, lang: lang, t: tr };
 
     var saved = localStorage.getItem('if22-lang') || 'tr';
     applyLang(saved);
