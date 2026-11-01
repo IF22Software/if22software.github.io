@@ -35,7 +35,7 @@ window.IF22_APPS = [
         name: 'Pawfect Time',
         logo: 'logos/pawfecttime.png',
         color: '#F7BBAE',
-        status: 'soon',
+        status: 'live',
         platforms: ['iPhone', 'Apple Watch'],
         tagline: {
             tr: 'Evcil dostlarının bakımı, tek yerde.',
@@ -49,7 +49,9 @@ window.IF22_APPS = [
             tr: ['Mama, kum ve bakım görevleri', 'İlaç dozları ve aşı takvimi', 'Kilo takibi ve günlük', 'Zamanında hatırlatmalar', 'Ailenle paylaş', 'Widget, Apple Watch ve Siri'],
             en: ['Feeding, litter and grooming tasks', 'Medication doses and vaccinations', 'Weight tracking and a diary', 'Timely reminders', 'Share with your family', 'Widgets, Apple Watch and Siri']
         },
-        links: {},
+        links: {
+            appstore: 'https://apps.apple.com/app/pawfect-time/id6827670572'
+        },
         screens: 0,
         legal: [
             { key: 'privacy', href: 'pawfecttime_privacy_policy.html' },
