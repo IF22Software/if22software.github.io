@@ -54,7 +54,8 @@ window.IF22_APPS = [
         legal: [
             { key: 'privacy', href: 'pawfecttime_privacy_policy.html' },
             { key: 'terms', href: 'pawfecttime_terms.html' },
-            { key: 'deletion', href: 'pawfecttime_data_deletion.html', label: 'apps.dataDeletion' }
+            { key: 'deletion', href: 'pawfecttime_data_deletion.html', label: 'apps.dataDeletion' },
+            { key: 'site', href: 'pawfecttime/', label: 'apps.pawfecttime.site' }
         ]
     },
     {
