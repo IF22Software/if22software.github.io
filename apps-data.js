@@ -36,7 +36,7 @@ window.IF22_APPS = [
         logo: 'logos/pawfecttime.png',
         color: '#F7BBAE',
         status: 'live',
-        platforms: ['iPhone', 'Apple Watch'],
+        platforms: ['iPhone', 'iPad', 'Apple Watch'],
         tagline: {
             tr: 'Evcil dostlarının bakımı, tek yerde.',
             en: 'All your pets\' care in one place.'
