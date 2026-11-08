@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap ve Veri Silme — Pairplot | IF22 Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('if22-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}catch(e){}</script>
+    <script>document.documentElement.setAttribute('lang', localStorage.getItem('if22-lang') || 'tr');</script>
+    <script src="i18n.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">IF22 Software</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+                    <li><a href="apps.html" data-i18n="nav.apps">Uygulamalar</a></li>
+                    <li><a href="team.html" data-i18n="nav.team">Ekibimiz</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle">EN</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg id="iconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg id="iconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title"><span class="lang-tr">Hesap ve Veri Silme</span><span class="lang-en">Account and Data Deletion</span></h1>
+        <p class="page-meta"><span class="lang-tr">Pairplot &mdash; IF22 Software &mdash; Yürürlük: 2026-11-09</span><span class="lang-en">Pairplot &mdash; IF22 Software &mdash; Effective: 2026-11-09</span></p>
+
+        <div class="prose" id="content">
+            <div class="lang-block lang-tr">
+            <p>Bu sayfa, <strong>Pairplot</strong> (geliştirici <strong>IF22 Software</strong>) kullanıcılarının hesaplarını ve verilerini nasıl silebileceğini açıklar.</p>
+            <section>
+                <h2>1. Uygulama içinden silme</h2>
+                <ol><li>Pairplot'u aç ve sağ üstteki koltuklara dokunarak <b>Profil</b>'e git.</li><li><b>Hesabı sil</b>'e dokun ve iki adımlı onayı tamamla.</li><li>Güvenlik için Apple ya da Google ile kimliğini yeniden doğrula.</li><li>Hesabın ve verilerin hemen silinir. Bu işlem geri alınamaz.</li></ol>
+            </section>
+            <section>
+                <h2>2. Uygulama olmadan silme</h2>
+                <p>Uygulamaya erişemiyorsan veya uygulamayı kaldırdıysan <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a> adresine <b>"Pairplot hesap silme"</b> konusuyla, hesabında kullandığın e-posta adresinden yaz. Apple'da e-postanı gizlediysen bunu belirt. Kimliğini doğruladıktan sonra talebini en geç 30 gün içinde yerine getiririz. Uygulamayı yeniden yüklemen gerekmez.</p>
+            </section>
+            <section>
+                <h2>3. Silinen veriler</h2>
+                <ul><li>Pairplot hesabın ve Apple ya da Google bağlantın</li><li>Profilin: görünen adın, e-postan ve tercihlerin</li><li>Mevcut listendeki puanların, izleme durumun ve bölüm ilerlemen</li><li>Davet kodun</li><li>Eşleşmemiş kullandıysan listenin tamamı</li></ul>
+            </section>
+            <section>
+                <h2>4. Partnerinde kalanlar</h2>
+                <p>Hesabını sildiğinde eşleşmen sonlanır ve ortak liste partnerin için arşivlenir. Partnerinin kendi puanları ve durumu ile listedeki film ve dizi kayıtları silinmez. Bu kayıtlarda adın yerine "Silinmiş hesap" görünür; yalnızca adın ya da e-postanla ilişkilendirilemeyen teknik bir kimlik kalabilir.</p>
+            </section>
+            <section>
+                <h2>5. Eski eşleşmeler</h2>
+                <p>Daha önce sonlandırdığın eşleşmelerin arşivinde kalan puan ve durum kayıtlarının da silinmesini istiyorsan <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a> adresine yaz; aynı süre içinde sileriz.</p>
+            </section>
+            <section>
+                <h2>6. Eşleşmeyi sonlandırmak</h2>
+                <p>Hesabını silmek istemiyorsan <b>Profil &gt; Eşleşmeyi sonlandır</b> ile yalnızca eşleşmeni bitirebilirsin; ortak liste ikinizde de arşivlenir.</p>
+            </section>
+            <section>
+                <h2>7. Yardım</h2>
+                <p>Sorularınız için: <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a></p>
+            </section>
+            </div>
+            <div class="lang-block lang-en">
+            <p>This page explains how users of <strong>Pairplot</strong> (developer <strong>IF22 Software</strong>) can delete their account and data.</p>
+            <section>
+                <h2>1. In the app</h2>
+                <ol><li>Open Pairplot and tap the seats at the top right to go to <b>Profil</b> (Profile).</li><li>Tap <b>Hesabı sil</b> (Delete account) and complete the two-step confirmation.</li><li>For security, confirm your identity again with Apple or Google.</li><li>Your account and data are deleted immediately. This cannot be undone.</li></ol>
+            </section>
+            <section>
+                <h2>2. Without the app</h2>
+                <p>If you cannot access the app or have removed it, write to <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a> with the subject <b>"Pairplot account deletion"</b> from the email address on your account. If you hid your email with Apple, please say so. After verifying your identity we will complete your request within 30 days. You do not need to reinstall the app.</p>
+            </section>
+            <section>
+                <h2>3. What is deleted</h2>
+                <ul><li>Your Pairplot account and its link to Apple or Google</li><li>Your profile: display name, email and preferences</li><li>Your scores, watch status and episode progress in your current list</li><li>Your invite code</li><li>Your entire list, if you were not paired</li></ul>
+            </section>
+            <section>
+                <h2>4. What stays with your partner</h2>
+                <p>Deleting your account ends your pairing and the shared list is archived for your partner. Your partner's own scores and status, and the film and series entries in the list, are not deleted. "Deleted account" appears in place of your name; only a technical ID that cannot be linked to your name or email may remain.</p>
+            </section>
+            <section>
+                <h2>5. Past pairings</h2>
+                <p>To have scores and status records left in the archives of pairings you ended earlier deleted as well, write to <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a>; we will delete them within the same period.</p>
+            </section>
+            <section>
+                <h2>6. Ending a pairing</h2>
+                <p>If you do not want to delete your account, you can end only your pairing under <b>Profil &gt; Eşleşmeyi sonlandır</b> (Profile &gt; End pairing); the shared list is archived for both of you.</p>
+            </section>
+            <section>
+                <h2>7. Help</h2>
+                <p>For questions: <a href="mailto:if22dev@gmail.com">if22dev@gmail.com</a></p>
+            </section>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p data-i18n="footer.rights">© 2026 IF22 Software. Tüm hakları saklıdır.</p>
+            <a href="apps.html" data-i18n="footer.privacy">Gizlilik Politikaları</a>
+        </div>
+    </footer>
+
+    <script>
+        const html = document.documentElement;
+        const iconSun = document.getElementById('iconSun'), iconMoon = document.getElementById('iconMoon');
+        function applyTheme(t) { html.setAttribute('data-theme', t); localStorage.setItem('if22-theme', t); iconSun.style.display = t==='dark'?'block':'none'; iconMoon.style.display = t==='light'?'block':'none'; }
+        applyTheme(localStorage.getItem('if22-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+        document.getElementById('themeToggle').addEventListener('click', () => applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+        document.querySelectorAll('.lang-block > p, .lang-block > section').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

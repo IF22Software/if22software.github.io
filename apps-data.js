@@ -2,6 +2,34 @@
    Screenshots live in screens/<id>/1.jpg … <screens>.jpg (pulled from the App Store listing). */
 window.IF22_APPS = [
     {
+        id: 'pairplot',
+        added: '2026-11-09',
+        name: 'Pairplot',
+        logo: 'logos/pairplot.png',
+        color: '#E3A92B',
+        status: 'soon',
+        platforms: ['iPhone', 'Android'],
+        tagline: {
+            tr: 'İki koltuk, tek seans.',
+            en: 'Two seats, one screening.'
+        },
+        desc: {
+            tr: 'Partnerinle ortak film ve dizi listeni kur. Biri ne eklerse diğeri anında görür; puanlar ikiniz de verene kadar gizli kalır, sonra birlikte açılır.',
+            en: 'Build a shared film and TV list with your partner. Whatever one of you adds, the other sees instantly; scores stay hidden until you have both rated, then open together.'
+        },
+        features: {
+            tr: ['6 haneli davet koduyla eşleşme', 'Anında güncellenen ortak liste', 'İkiniz de verene kadar gizli puanlar', 'Dizide kim hangi bölümde', 'Bağlantıdan paylaşarak ekleme', 'Ana ekran widget\'ı'],
+            en: ['Pair up with a 6-digit invite code', 'A shared list that updates instantly', 'Scores hidden until you have both rated', 'See who is on which episode', 'Add titles by sharing a link', 'Home Screen widget']
+        },
+        links: {},
+        screens: 0,
+        legal: [
+            { key: 'privacy', href: 'pairplot_privacy_policy.html' },
+            { key: 'terms', href: 'pairplot_terms.html' },
+            { key: 'deletion', href: 'pairplot_data_deletion.html' }
+        ]
+    },
+    {
         id: 'hibi',
         added: '2026-10-23',
         name: 'Hibi 日々',
