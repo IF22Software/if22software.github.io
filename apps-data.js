@@ -93,7 +93,7 @@ window.IF22_APPS = [
         added: '2026-06-16',
         name: 'Net Sayacım',
         logo: 'logos/netsayacim.png',
-        color: '#FFD23F',
+        color: '#9C97F2',
         status: 'live',
         platforms: ['iPhone', 'Android'],
         tagline: {
@@ -112,7 +112,7 @@ window.IF22_APPS = [
             appstore: 'https://apps.apple.com/tr/app/net-sayac%C4%B1m-s%C4%B1nav-takibi/id6783307079',
             play: 'https://play.google.com/store/apps/details?id=com.if22software.net_sayacim'
         },
-        screens: 5,
+        screens: 6,
         legal: [
             { key: 'privacy', href: 'netsayacim_privacy_policy.html' },
             { key: 'terms', href: 'netsayacim_terms.html' },
